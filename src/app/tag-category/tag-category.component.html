@@ -1,0 +1,47 @@
+<h2>List of category</h2>
+
+
+<div *ngFor="let cat of allcategory|async" ><span (click)="showtag(cat.name,cat.id)">
+        <li>
+            {{cat.name}} {{cat.id}}
+        </li>
+        </span>
+</div>
+<form #Category="ngForm">
+    <input type="text" [(ngModel)]="category.name" name="Name"  placeholder="Name" />
+    <button (click)="addcategory()" type="Add" class="btn btn-success" [disabled]="!Category.form.valid"> Add </button>       
+</form>
+
+
+<div>
+    <h2>List of Tags </h2>
+    <li  *ngFor="let list of tag">
+        {{list}}
+        </li>
+      <form #Tag="ngForm">
+            <input type="text" [(ngModel)]="tagname.name" name="Name"  placeholder="Name" />
+            <button (click)="addtag()" type="Add" class="btn btn-success" [disabled]="!Tag.form.valid"> Add </button>       
+        </form>
+</div>
+
+<div>
+    <h2>List of counter </h2>
+    <form #Counter="ngForm" >
+        <input type="text" [(ngModel)]="count.name" name="Name"  placeholder="Name">
+        <button (click)="addcounter()" type="Add" class="btn btn-success" [disabled]="!Counter.form.valid"> Add </button>       
+    </form>
+    <ul>
+        <li *ngFor="let count of allcounter|async; let i=index"><div *ngIf="countnumber[i+1]">
+            {{count.name}}  {{this.countnumber[i]}}
+
+    <button  (click)="incrementcount(count.name,i)" class="btn btn-success" id="incrementcount"> + </button>
+
+    <button  (click)="decrementcount(count.name,i)" class="btn btn-success" id="decrementcount"> - </button>
+   
+</div>
+           </li>
+         
+    </ul>
+    
+    
+</div>

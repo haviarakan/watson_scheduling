@@ -1,0 +1,192 @@
+<h3>Name:{{this.name}}</h3>
+
+<form  #Journey="ngForm">
+    <input type="date" [(ngModel)]="journey.date" name="date" required  placeholder="date"/>
+        <br>
+        <select name="type" [(ngModel)]="selecttype" >
+          <option *ngFor="let type of selectedtypes" [ngValue]="type">
+            {{type}}
+          </option>
+        </select>
+        <br>
+        <input type="text" [(ngModel)]="journey.location" name="location"  placeholder="location" />
+       <br>
+        <input type="text" [(ngModel)]="journey.quicknotes" name="quicknotes"  placeholder="quicknotes" />
+        <br>
+        <input type="text" [(ngModel)]="journey.sequence" name="sequence"  placeholder="sequence" />
+        <br>
+      </form>
+        <form style="width: 30%">
+       <ng-multiselect-dropdown
+        [placeholder]="'people_involved'" 
+        [data]="peoples" 
+        [(ngModel)]="people"
+        [ngModelOptions]="{standalone: true}" 
+        [settings]="dropdownSettings"
+        (onSelect)="onItemSelect($event)" 
+       >
+       </ng-multiselect-dropdown>
+       </form>
+   <button (click)="addjourney(this.participantid)" class="btn btn-success" [disabled]="!Journey.form.valid">Add New</button>
+      
+<div class="columnright">
+    <h4>validty</h4>
+    <input type="date" [(ngModel)]="validty" name="validty" placeholder="date"/>
+    <button (click)="addvalidty(this.participantid)" class="btn btn-primary" [disabled]="!validty">Add validty</button>
+</div>
+<br>
+<h4>Total Consultation & Review </h4>
+  <div>
+    <input type="number" [(ngModel)]="total_consultations" name="total_consultations" required  placeholder="total_consultations"/>
+    <button (click)="addconsultation(this.participantid)" class="btn btn-primary" [disabled]="!total_consultations">Add consultation</button>
+    <br>
+    <input type="number" [(ngModel)]="total_review" name="total_review" required  placeholder="total_review"/>
+    <button (click)="addreview(this.participantid)" class="btn btn-primary" [disabled]="!total_review">Add review</button>
+  </div>
+<h4>Edit Journey</h4>
+<div><form #editJourney="ngForm">
+  <h5>Date</h5><input type="date" [(ngModel)]="this.date" name="date" required placeholder="date"/>
+  <h5>Type</h5><select name="type" [(ngModel)]="this.type" >
+      <option *ngFor="let type of selectedtypes" [ngValue]="type" ng-selected="edittype">
+        {{this.type}}
+      </option>
+    </select>
+    <h5>Location</h5><input type="text" [(ngModel)]="this.location" name="location"  placeholder="location" />
+    <h5>Quicknotes</h5> <input type="text" [(ngModel)]="this.quicknotes" name="quicknotes"  placeholder="quicknotes" />
+    <h5>Sequence</h5>  <input type="text" [(ngModel)]="this.sequence" name="sequence"  placeholder="sequence" />    
+    <h5>people_involved </h5> <form style="width: 30%">
+    <ng-multiselect-dropdown 
+    [placeholder]="'people_involved'" 
+    [data]="peoples" 
+    [(ngModel)]="this.people_involved"
+    [ngModelOptions]="{standalone: true}" 
+    [settings]="dropdownSettings"
+    (onSelect)="onItemSelect($event)" 
+    >
+   </ng-multiselect-dropdown>
+   </form>
+</form>
+</div>
+  <br>
+  <button (click)="updatedjourney()" type="submit" class="btn btn-success" [disabled]="!editJourney.form.valid">update</button>
+  <br>
+ 
+  <!--div class="card">
+    <div class="card-header">
+      Firebase cloud Storage 
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">Select a file to upload:</h2>
+      <input type="file" (change)="upload($event)" accept=".png,.jpg,.mp4,.pdf,.doc"/>
+
+    </div>
+  </div-->
+  <!--div *ngIf="downloadURL |async; let downloadSrc" class="alert alert-info" role="alert">
+    File uploaded: 
+    <a href="downloadSrc">{{downloadSrc}}</a>
+</div-->
+<!--div ng-repeat="type in types =(type | type:Consultation)">
+  {{type.Consultation}}
+</div-->
+
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date </mat-header-cell>
+      <mat-cell *matCellDef="let journey" (click)="test(journey)" > {{journey.date }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+      <mat-cell *matCellDef="let journey"> {{journey.type}}</mat-cell>  
+      </ng-container>
+      <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> location </mat-header-cell>
+        <mat-cell *matCellDef="let journey"> {{journey.location}} </mat-cell>  
+        </ng-container>
+    <ng-container matColumnDef="quicknotes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Quick Notes </mat-header-cell>
+      <mat-cell *matCellDef="let journey"> {{journey.quicknotes}}</mat-cell>  
+    </ng-container>
+    <ng-container matColumnDef="linkname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> linkname </mat-header-cell>
+      <mat-cell *matCellDef="let journey">  
+          <input type="text" [(ngModel)]="journey.linkname" name="journey.linkname" placeholder="linkname"/>
+          <br>
+        {{journey.linkname}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="link">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> link </mat-header-cell>
+      <mat-cell *matCellDef="let journey">  
+          <input type="text" [(ngModel)]="journey.link" name="journey.link" placeholder="link"/>
+          <br>
+          <button (click)="addlink(journey.id,journey.link,journey.linkname)" class="btn btn-primary" [disabled]="!journey.linkname">Add link</button>
+          <br>
+        {{journey.link}}</mat-cell>
+  </ng-container>
+    
+  <ng-container matColumnDef="multiplelink">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> multiplelink </mat-header-cell>
+      <mat-cell *matCellDef="let journey"> <div [innerHTML]="journey.multiplelink"></div>
+        </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="associatedmedia">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Associated media</mat-header-cell>
+      <mat-cell *matCellDef="let journey">
+          <input id="fileToUpload" type="file" (change)="upload($event,journey.id,journey.linkname)" [disabled]="!journey.linkname" accept=".png,.jpg,.mp4,.mp3,.pdf,.doc"/> 
+      {{journey.associatedmedia}}</mat-cell>
+  </ng-container>
+  <!--ng-container matColumnDef="files">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> files </mat-header-cell>
+      <mat-cell *matCellDef="let journey">{{this.file}}
+     </mat-cell>
+  </ng-container>
+
+  -->
+  <ng-container matColumnDef="people_involved"> 
+      <mat-header-cell *matHeaderCellDef mat-sort-header> people_involved </mat-header-cell>
+      <mat-cell *matCellDef="let journey">    
+{{journey.people_involved}}
+        </mat-cell> 
+  </ng-container>
+<ng-container matColumnDef="sequence"> 
+  <mat-header-cell *matHeaderCellDef mat-sort-header> sequence </mat-header-cell>
+  <mat-cell *matCellDef="let journey">  
+      <!--input matInput [(ngModel)]="journey.sequence" name="journey.sequence" placeholder="sequence"/>
+    <button (click)="addsequence(journey.id,journey.sequence)" class="btn btn-primary" > Add </button>
+      -->
+ {{journey.sequence}} </mat-cell>
+</ng-container>
+ <ng-container matColumnDef="button">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+    <mat-cell *matCellDef="let journey"> 
+    <button (click)="deletejourney(journey.id,participantid,journey.type)" class="btn btn-primary"> delete</button>   
+    </mat-cell>
+ </ng-container>
+ <ng-container matColumnDef="edit">
+  <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+  <mat-cell *matCellDef="let journey"> 
+  <button (click)="editjourney(journey,participantid)" class="btn btn-primary">edit</button>   
+  </mat-cell>
+</ng-container>
+<!--ng-container matColumnDef="updated">
+  <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+  <mat-cell *matCellDef="let journey"> 
+    <button (click)="updatedjourney(journey,participantid)" type="submit" class="btn btn-success" [disabled]="!editJourney.form.valid">update</button>
+  </mat-cell>
+</ng-container-->
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> 
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+  </mat-table>
+  
+      <!--li *ngFor="let linkarr of newlink">
+          <a href="{{linkarr}}" target="_blank">{{linkarr}}</a>
+      </li-->
+  
+
+           

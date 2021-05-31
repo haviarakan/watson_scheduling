@@ -1,0 +1,19 @@
+.mat-column-name{
+    width:25%;
+}
+.mat-column-message{
+    width: 25%;
+}
+.mat-column-source{
+    width:25%;
+
+}
+.mat-column-lastvisit{
+    width:25%;
+}
+.mat-column-owner{
+    width:25%;
+}
+.mat-column-comments{
+    width:25%;
+}

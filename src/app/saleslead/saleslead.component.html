@@ -1,0 +1,101 @@
+<form  #leads="ngForm">
+    <input type="text" [(ngModel)]="sales.name" name="name" required  placeholder="Name"/>
+    <br>
+    <input type="text" [(ngModel)]="sales.message" name="message" required  placeholder="message"/>
+    <br>
+    <input type="test" [(ngModel)]="sales.source" name="source"  placeholder="source" required />
+    <br>
+    <input type="date" [(ngModel)]="sales.createddate" name="createddate" required  placeholder="createddate" multiple/>
+    <br>
+    <input type="date" [(ngModel)]="sales.activeupdates" name="activeupdates" required  placeholder="activeupdates" multiple/>
+    <br>
+    <input type="text" [(ngModel)]="sales.statuslead" name="statuslead" required  placeholder="statuslead" multiple/>
+     <br>
+    <input type="text" [(ngModel)]="sales.lastvisit" name="lastvisit"  placeholder="lastvisit" required />
+    <br>
+    <input type="text" [(ngModel)]="sales.owner" name="owner"  placeholder="owner" required />
+    <br>
+    <button (click)="addleads()" class="btn btn-success" [disabled]="!leads.form.valid"> Add leads </button>
+  </form>
+  <br>
+<div>
+        <select placeholder="all" name="owner" [(ngModel)]="selectedowner" (click)="filterlead()" >  
+        <option value='all'>all</option>
+          <option *ngFor="let list of owner">
+          {{ list }}
+        </option>
+      </select> 
+      <select  placeholder="all" name="status" [(ngModel)]="selectedstatus" (click)='filterlead()'>
+       <option value='all'>all</option> 
+        <option *ngFor = "let status of statuslead">
+          {{status}}
+        </option>
+      </select>
+     
+</div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+    <mat-cell *matCellDef="let sales" > {{sales.name}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="message">
+    <mat-header-cell fxFlex="100px" *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
+      <mat-cell *matCellDef="let sales"> {{sales.message}}</mat-cell>  
+    </ng-container>
+  <ng-container matColumnDef="source">
+    <mat-header-cell fxFlex="75px" *matHeaderCellDef mat-sort-header> Source</mat-header-cell>
+    <mat-cell *matCellDef="let sales"> {{sales.source}}</mat-cell>  
+  </ng-container>
+  <ng-container matColumnDef="createddate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Createddate</mat-header-cell>
+    <mat-cell *matCellDef="let sales" > {{sales.createddate}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="activeupdates">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Activeupdates</mat-header-cell>
+    <mat-cell *matCellDef="let sales" > {{sales.activeupdates}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell fxFlex="75px" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+    <mat-cell *matCellDef="let sales" > <select [(ngModel)]="sales.statuslead" (change)="updatestatus(sales.statuslead,sales.id)">
+        <option [value]="sales.statuslead" selected="selected">{{sales.statuslead}}</option>
+      <option *ngFor = "let status of statuslead" [ngValue]="status">
+        {{status}}
+      </option>
+    </select>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="lastvisit">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Lastvist</mat-header-cell>
+    <mat-cell *matCellDef="let sales"> {{sales.lastvisit}}</mat-cell>
+  </ng-container>  
+<ng-container matColumnDef="owner">
+  <mat-header-cell fxFlex="60px" *matHeaderCellDef mat-sort-header> Owner </mat-header-cell>
+  <mat-cell *matCellDef="let sales"> {{sales.owner}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="comments">
+  <mat-header-cell  *matHeaderCellDef mat-sort-header> Comments </mat-header-cell>
+  <mat-cell *matCellDef="let sales"> {{comments}}
+  <mat-form-field floatLable="never">
+    <input matInput placeholder="comments"[(ngModel)]="sales.comments">
+    </mat-form-field>
+    <button (click)="addcomments(sales.comments,sales.id)" class="btn btn-success"> Add </button>
+  </mat-cell> 
+</ng-container>
+
+<ng-container matColumnDef="followupdate">
+  <mat-header-cell *matHeaderCellDef mat-sort-header> Follow Up Date </mat-header-cell>
+  <mat-cell *matCellDef="let sales"> 
+  <mat-form-field floatLable="never">
+      <input matInput [matDatepicker]="datepicker">
+      <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      <mat-datepicker #datepicker></mat-datepicker>
+    </mat-form-field>
+      </mat-cell>
+</ng-container>
+
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> 
+  <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+
+</mat-table>

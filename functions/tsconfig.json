@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "lib": ["es6","dom"],
+    "module": "commonjs",
+    "noImplicitReturns": false,
+    "outDir": "lib",
+    "sourceMap": true,
+    "target": "es6",
+    "types": [
+      "node"
+    ]
+  },
+  "compileOnSave": true,
+  "include": [
+    "src", "../src/app/event.ts", "../src/app/loginscreen/webphone.ts"
+  ]
+}

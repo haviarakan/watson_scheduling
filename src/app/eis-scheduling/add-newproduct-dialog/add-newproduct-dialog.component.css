@@ -1,0 +1,26 @@
+.columndialog{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.formrowdialog{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}   
+
+.textField {
+    width: 300px;
+    margin: 5px;
+  }
+  .btn {
+    padding: 10px 15px;
+    border-radius: 12px;
+    width: 200px;
+    font-size: 24px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }

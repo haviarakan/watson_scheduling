@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  .ifcontainer{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .headingContainer {
+
+    font-size: 32px;
+    letter-spacing: 6px;
+  }
+  .textField {
+    width: 500px;
+    padding: 10px;
+    font-size: 20px;
+  }
+  .buttonSizeChange {
+    margin-bottom: 20px;
+    width: 250px;
+    height: 50px;
+    padding: 8px 14px;
+    font-size: 26px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  .sticky1 {
+    position: fixed;
+    width: 100%;
+  }
+  

@@ -1,0 +1,66 @@
+
+<span *ngFor="let formque of formsque| async;index as i"> 
+    {{formque.order}}  {{formque.lable}}<span (click)="displaytemplate(formque)">
+      <li *ngIf="formque.type === 'dropdown'"><span>
+         
+        <select name="option" [(ngModel)]="typesarray[i].ans" (click)="selectedoption(selectoption)" >
+          <option *ngFor="let options of formque.Answeroption" [ngValue]="options">
+            {{options}}
+          </option>
+          {{selectoption}}
+        </select>
+     
+           </span>
+        </li>
+        <div *ngIf="formque.type === 'longtext'"><span>
+          <textarea type="text" [(ngModel)]="typesarray[i].ans" name="type" placeholder="" >{{types}}</textarea>
+        </span>
+      </div>
+      <div *ngIf="formque.type === 'smalltext'"><span>
+        <input type="text" [(ngModel)]="typesarray[i].ans" name="type" placeholder="" />
+      </span>
+    </div>
+        <div *ngIf="formque.type === 'checkbox'"><span>
+          <li *ngFor="let option of formque.Answeroption">
+          <input type="checkbox" (change)="onchange(option,i,$event.target.checked)" >{{option}}<br>
+          </li>
+           </span>
+          </div> 
+         </span>
+  </span>   
+  
+        <button (click)="formsubmitted()" class="btn btn-success" >Submit</button>
+  
+      <br>
+
+<!--
+<span *ngFor="let formque of formsque| async"> 
+  {{formque.order}}  {{formque.lable}}<span (click)="displaytemplate(formque)">
+    <li *ngIf="formque.type === 'dropdown'"><span>
+       
+      <select name="option" [(ngModel)]="selectoption" (click)="selectedoption(selectoption)" >
+        <option *ngFor="let options of formque.Answeroption" [ngValue]="options">
+          {{options}}
+        </option>
+        {{selectoption}}
+      </select>
+   
+         </span>
+      </li>
+      <div *ngIf="formque.type === 'textarea'"><span>
+        <textarea type="text" [(ngModel)]="templateform.textinput" name="type" placeholder="textarea" >{{types}}</textarea>
+      </span>
+    </div>
+      <div *ngIf="formque.type === 'checkbox'"><span>
+        <li *ngFor="let option of formque.Answeroption">
+        <input type="checkbox" (change)="onchange(option,$event.target.checked)" >{{option}}<br>
+        </li>
+         </span>
+        </div> 
+       </span>
+</span>   
+
+      <button (click)="formsubmitted(order,lable)" class="btn btn-success" >Submit</button>
+
+    <br>
+-->

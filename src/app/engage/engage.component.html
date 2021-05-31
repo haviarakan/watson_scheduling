@@ -1,0 +1,38 @@
+{{statusmessage}}
+<h2> Click to Choose a Template</h2>
+
+
+        <li *ngFor="let template of alltemplate | async"><span (click) ="displaytemplatedata(template)" >
+                {{template.name}} | {{template.templateid}}
+        </span>
+        </li>
+        <div *ngIf="fieldsarray">
+          <h3>Enter Template Details</h3>
+        <li *ngFor="let fields of fieldsarray"><span>
+            <textarea type="text" [(ngModel)]="fieldsvalue[fields]" name="fieldsvalue" placeholder="{{fields}}" required>{{fields}}</textarea>
+        </span>
+        </li>
+        <h3> Test and Send to ALL Customers</h3>
+<form #emailForm="ngForm">
+        <input type="text" [(ngModel)]="email" name="Email"  placeholder="Email" required email />
+        <button (click)="test()" class="btn btn-success" id="test" [disabled]="!emailForm.form.valid">test</button>
+        <br>
+        <button (click)="sendemailtoapproval()" class="btn btn-success" id="sendemailtoapproval" [disabled]="testbtn">sendemail to approval</button>
+        <br>  
+        <br>
+</form>
+      </div>
+
+  <h2> Emails for Approval</h2>  
+            <li *ngFor="let approval of allemailapproval| async">
+                {{approval.name}} | {{approval.templateid}} |{{approval.approvalstatus}}
+                <span (click)="delete(approval)" style="Padding-left:20px;"> [delete] </span>
+                <button (click)="sendtocustomers(approval)" class="btn btn-success" id="sendtocustomers" [disabled]="(approval.approvalstatus=='notapproved'||approval.approvalstatus=='notresponded')">Send to Customers</button>
+                <ul>
+                <li *ngFor="let fieldvalue of approval.fieldsvalue | keyvalue" >  
+                        {{fieldvalue.value}}  
+                </li>
+             
+                </ul>
+            </li>
+

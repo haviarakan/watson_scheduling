@@ -1,0 +1,38 @@
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    text-align: left;
+    width: 500px;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 93%;
+    left: 50%;
+    margin-left: -30px;
+   height: 20px;
+  
+   
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    
+   
+  }
+  .child{
+    height:500px;
+    border: thin solid black;
+    width: 350px;
+    float: left;
+    
+ }
+ .main{
+    height: 400px;
+    width:100%;
+ }

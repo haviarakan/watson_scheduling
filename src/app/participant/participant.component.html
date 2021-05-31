@@ -1,0 +1,35 @@
+<section *ngIf="(participant | async) as participant">
+    <div><b>{{participant.name}}</b>
+      <br>
+      (
+    {{participant.recentpurchase}} ||
+    Email: {{participant.email}} ||
+    Phone: {{participant.phone}} )
+  </div>
+  </section>
+<div>
+  Testing
+<li *ngFor="let test of tests">
+  test name: {{test.name}} | {{test.age}}
+</li>
+</div>
+
+  <h3> Attendance </h3>
+
+  <div><b> Attended Events </b></div>
+
+ <li *ngFor="let aed of attendedeventpopulated  | async">
+   <div *ngIf="(aed.participant | async) as participant">
+     {{participant.id}}
+   </div>
+   <div *ngIf="(aed.event | async) as event">
+     {{event.id}}
+   </div>
+  </li>
+
+
+<div>  <b> Installation Events </b> </div>
+
+  <li *ngFor="let event of events | async">
+    {{event.name}} | {{ event.format}}
+  </li>

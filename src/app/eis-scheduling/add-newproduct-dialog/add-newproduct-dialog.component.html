@@ -1,0 +1,44 @@
+<div mat-dialog-title class="formrowdialog">
+<h1>Add New Product</h1>
+</div>
+<div [formGroup]="addnewproductForm" mat-dialog-content class="columndialog">
+        <div class="formrowdialog">
+            <mat-form-field class="textField" appearance="outline">
+                <mat-label>Product</mat-label>
+                <input type="text" matInput formControlName="productname" placeholder="Enter product name">
+            </mat-form-field>
+        </div>
+        <div
+        class="formrowdialog"
+        formArrayName="eventtypearray"
+        *ngFor = "let array of eventtypearray.controls; let i = index"
+        >
+            <div [formGroupName]="i" >
+                <mat-form-field class="textField" appearance="outline">
+                    <mat-label>Event Type</mat-label>
+                    <input type="text" matInput formControlName="eventtypename" placeholder="Enter Eventtype name">
+                </mat-form-field>
+
+                <mat-form-field class="textField" appearance="outline">
+                    <mat-label>Duration (mins)</mat-label>
+                    <input type="text" matInput formControlName= "duration" placeholder="Enter duration in minutes">
+                </mat-form-field>
+
+                <mat-form-field class="textField" appearance="outline">
+                    <mat-label>Collaboration</mat-label>
+                    <input type="text" matInput formControlName="collaboration" placeholder="Enter Collaboration Required or Not">
+                </mat-form-field>
+                
+                <button mat-fab type="button" color="standard" (click)="removeeventtypearray(i)"> <mat-icon>remove </mat-icon></button>
+            </div>
+        </div>
+    <div>
+            <button mat-icon-button type="button" color="standard" (click)="addeventtypearray()"> <mat-icon>add_box </mat-icon>Add</button>
+    </div>
+    
+        <!-- {{addnewproductForm.value | json}}
+        {{addnewproductForm.invalid | json}} -->
+    <div class="formrowdialog">
+        <button [disabled]="" class="btn" mat-raised-button color="primary" type="submit" (click)="onformsubmit(addnewproductForm.value)">Submit</button>
+    </div>
+</div>

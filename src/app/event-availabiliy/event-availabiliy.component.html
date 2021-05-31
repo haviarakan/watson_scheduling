@@ -1,0 +1,63 @@
+<div [formGroup] = "eventavailabilityForm" class="eventcontainer">
+    {{eventavailabilityForm.value | json}}
+    <mat-form-field class="textField">
+        <mat-label>EIS Name</mat-label>
+        <input type="text" matInput formControlName="eisname" placeholder="Enter a name">
+
+    </mat-form-field>
+    <mat-form-field class="textField">
+        <mat-label>Product</mat-label>
+        <mat-select  formControlName="eventProduct" multiple>
+            <mat-option *ngFor = "let list of selectProduct" [value]="list">{{list}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="textField">
+        <mat-label>Event Type</mat-label>
+        <mat-select  formControlName="eventType" multiple>
+            <mat-option *ngFor = "let list of selectEventtype" [value]="list">{{list}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="textField">
+        <mat-label>Start Date</mat-label>
+        <input type="date" placeholder="Enter Start Date" matInput formControlName="startdate"/>
+    </mat-form-field>
+
+    <mat-form-field class="textField">
+        <mat-label>Start Time</mat-label>
+        <mat-select  formControlName="starttime" >
+            <mat-option *ngFor = "let list of timelist" [value]="list">{{list}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="textField">
+        <mat-label>End Time</mat-label>
+        <mat-select  formControlName="endtime" >
+            <mat-option *ngFor = "let list of timelist" [value]="list">{{list}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="textField">
+        <mat-label>Options</mat-label>
+        <mat-select  formControlName="option" (selectionChange)="onoptionselect($event.value)">
+            <mat-option *ngFor = "let list of option" [value]="list">{{list}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="textField">
+        <mat-label>Weekday</mat-label>
+        <mat-select [(value)]="selected" formControlName="weekday" multiple [disabled]="isDisabled">
+            <mat-option *ngFor = "let list of weekday;let i = index" [value]="i">{{list}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+<p>you selected : {{selected}}</p>
+
+    <mat-form-field class="textField">
+        <mat-label>End Date</mat-label>
+        <input type="date" placeholder="Enter Start Date" matInput formControlName="enddate" isDisabled="isDisabled" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="btn" [disabled]="eventavailabilityForm.invalid" type="submit" (click)="onSubmit(eventavailabilityForm.value)">Submit</button>
+    
+</div>

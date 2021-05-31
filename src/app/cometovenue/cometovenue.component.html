@@ -1,0 +1,263 @@
+<h3>Queue Management</h3>
+<form  #Queue="ngForm">
+  City:<select  name="cities" [(ngModel)]="selectcities">  
+          <option *ngFor="let list of cities" [ngValue]="list" > 
+          {{ list }}
+        </option>
+        </select>
+        <br><br>
+        Type: <select  name="AHtype" [(ngModel)]="selecttype" >
+          <option *ngFor="let type of AHtype" [ngValue]="type">
+            {{type}}
+          </option>
+        </select>
+        <br>
+        <br>
+<button (click)="queue()" class="btn btn-success">Queue</button>
+</form>  
+
+
+<div style="overflow-y: scroll" class="child" >
+<b>Requested</b>
+
+<li *ngFor="let token of alltoken; let i=index;" style="padding-top: 30px">
+  <div class="tooltip">
+    {{token.name.split(" ")[0]}}<br>
+ 
+  <span  class="tooltiptext">{{token.tokennumber}} {{token.name}}</span>  <br>
+  <button (click)="queuecancel1(token.id)" class="btn btn-success">Cancel</button>
+    <button (click)="queue1(i)" class="btn btn-success">Next</button>
+ 
+     <ol [hidden]="!this.nextlevel1[i]"> 
+     {{token.name}}  
+            <br> 
+             {{token.type}}
+             <br>
+             {{token.city}}
+             <br>
+             {{token.participantid}}
+             <br>
+                 {{this.mydate}}
+              <br>
+                   <input type="text" [(ngModel)]="quicknotes" name="quicknotes"  placeholder="quicknotes" />
+                     <br>
+                    <input type="text" [(ngModel)]="sequence" name="sequence"  placeholder="sequence" />
+                     <br>
+                     <select placeholder="" name="stage" [(ngModel)]="selectstage">  
+                            <option *ngFor="let stage of nextstage"> 
+                            {{ stage }}
+                          </option>
+                          </select>
+                          <br>
+                          <form style="width: 200px">
+                           <ng-multiselect-dropdown
+                            [placeholder]="'people_involved'" 
+                            [data]="peoples" 
+                            [(ngModel)]="people"
+                            [ngModelOptions]="{standalone: true}" 
+                            [settings]="dropdownSettings"
+                            (onSelect)="onItemSelect($event)" 
+                           >
+                           </ng-multiselect-dropdown>
+                           </form>
+             <button (click)="queuestage(token.id,token.city,token.name,token.type,token.tokennumber,token.participantid)" class="btn btn-success">Next Stage</button>
+              <br><br>
+   </ol>  
+  </div>
+</li>
+</div>
+
+<div style="overflow-y: scroll" class="child" >
+<b>Be Available</b>
+ 
+<li *ngFor="let token of cometovenue|async; let i=index;" style="padding-top: 30px" >
+  <div class="tooltip">
+  {{token.name.split(" ")[0]}}<br>
+  
+  <span  class="tooltiptext"> {{token.tokennumber}} {{token.name}}</span> <br>
+    <button (click)="queue1(i)" class="btn btn-success">Next</button>
+ 
+     <ol [hidden]="!this.nextlevel1[i]"> 
+     {{token.name}}  
+            <br> 
+             {{token.type}}
+             <br>
+             {{token.city}}
+             <br>
+             {{token.participantid}}
+             <br>
+                 {{this.mydate}}
+                 <br>
+
+                   <input type="text" [(ngModel)]="quicknotes" name="quicknotes"  placeholder="quicknotes" />
+                     <br>
+                    <input type="text" [(ngModel)]="sequence" name="sequence"  placeholder="sequence" />
+                     <br>
+                     <select placeholder="" name="stage" [(ngModel)]="selectstage">  
+                            <option *ngFor="let stage of nextstage"> 
+                            {{ stage }}
+                          </option>
+                          </select>
+                          <br>
+                          <form style="width: 200px">
+                           <ng-multiselect-dropdown
+                            [placeholder]="'people_involved'" 
+                            [data]="peoples" 
+                            [(ngModel)]="people"
+                            [ngModelOptions]="{standalone: true}" 
+                            [settings]="dropdownSettings"
+                            (onSelect)="onItemSelect($event)" 
+                           >
+                           </ng-multiselect-dropdown>
+                           </form>
+             <button (click)="queuestage(token.id,token.city,token.name,token.type,token.tokennumber,token.participantid)" class="btn btn-success">Next Stage</button>
+              <br><br>
+   </ol>  
+  </div>
+</li>
+</div>
+
+    <!--li *ngFor="let token of selected | async ; let i=index;" style="padding-top: 30px" >
+          <div class="tooltip">
+              {{token.tokennumber}} <span  class="tooltiptext">{{token.name}}</span> 
+               <button (click)="queue1(i)" class="btn btn-success">Next</button>
+                  <br>
+                  <ol [hidden]="!this.nextlevel1[i]"> 
+                  {{token.name}}  
+                         <br> 
+                          {{token.type}}
+                          <br>
+                          {{token.city}}
+                          <br>
+                          {{token.participantid}}
+                          <br>
+                              {{this.mydate}}
+
+                                <input type="text" [(ngModel)]="quicknotes" name="quicknotes"  placeholder="quicknotes" />
+                                  <br>
+                                 <input type="text" [(ngModel)]="sequence" name="sequence"  placeholder="sequence" />
+                                  <br>
+                                  <select placeholder="" name="stage" [(ngModel)]="selectstage">  
+                                         <option *ngFor="let stage of nextstage"> 
+                                         {{ stage }}
+                                       </option>
+                                       </select>
+                                       <br>
+                                       <form style="width: 200px">
+                                        <ng-multiselect-dropdown
+                                         [placeholder]="'people_involved'" 
+                                         [data]="peoples" 
+                                         [(ngModel)]="people"
+                                         [ngModelOptions]="{standalone: true}" 
+                                         [settings]="dropdownSettings"
+                                         (onSelect)="onItemSelect($event)" 
+                                        >
+                                        </ng-multiselect-dropdown>
+                                        </form>
+                          <button (click)="queuestage(token.id,token.city,token.name,token.type,token.tokennumber,token.participantid)" class="btn btn-success">Next Stage</button>
+                           <br><br>
+                </ol>      
+      </div>
+      </li>
+ 
+ 
+      <div style="overflow-y: scroll" class="child">
+       <b>come to venue</b> 
+       
+        <li *ngFor="let token of cometovenue |async; let j=index;" style="padding-top: 30px" >
+          <div class="tooltip">
+            {{token.tokennumber}} <span  class="tooltiptext">{{token.name}}</span> 
+             <button (click)="queue2(j)" class="btn btn-success">Next</button>
+            <br>
+          <ol [hidden]="!this.nextlevel2[j]">
+                {{token.name}}
+                <br>
+                {{token.type}}
+                <br>
+                {{token.city}}
+                <br>
+                {{token.participantid}}
+                <br>
+              {{this.mydate}}
+
+                <input type="text" [(ngModel)]="quicknotes" name="quicknotes"  placeholder="quicknotes" />
+                        <br>
+                         <input type="text" [(ngModel)]="sequence" name="sequence"  placeholder="sequence" />
+                        <br>
+                        <select placeholder="" name="stage" [(ngModel)]="selectstage">  
+                               <option *ngFor="let stage of nextstage"> 
+                               {{ stage }}
+                             </option>
+                             </select>
+                             <br>
+                             <form style="width: 200px">
+                              <ng-multiselect-dropdown
+                               [placeholder]="'people_involved'" 
+                               [data]="peoples" 
+                               [(ngModel)]="people"
+                               [ngModelOptions]="{standalone: true}" 
+                               [settings]="dropdownSettings"
+                               (onSelect)="onItemSelect($event)" 
+                              >
+                              </ng-multiselect-dropdown>
+                              </form>
+                <button (click)="queuestage(token.id,token.city,token.name,token.tokennumber,token.participantid)" class="btn btn-success">Next Stage</button>
+                 <br><br>
+          </ol> 
+              
+    </div>
+  </li>
+  </div>
+
+
+
+Review Control
+
+  <li *ngFor="let event of allevent | async">
+    
+    <a href="/controlpanel/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+
+  </li>
+
+
+Review display
+<li *ngFor="let event of allevent | async">
+  <a href="/queuedisplay/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+
+uP!LifeReport
+<li *ngFor="let event of allevent | async">
+  <a href="/uplifereport/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+Videointerview
+<li *ngFor="let event of allevent | async">
+  <a href="/videointerview/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+evolutionmapping
+<li *ngFor="let event of allevent | async">
+  <a href="/evolutionmapping/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+previousadjustsmentslog
+<li *ngFor="let event of allevent | async">
+  <a href="/previousadjustsmentslog/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+A&H review
+<li *ngFor="let event of allevent | async">
+  <a href="/review/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+changework
+<li *ngFor="let event of allevent | async">
+  <a href="/changework/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+changeworkvalidation
+<li *ngFor="let event of allevent | async">
+  <a href="/changeworkvalidation/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+
+
+Consultation control
+
+<li *ngFor="let event of allevent | async">
+  <a href="/consultationpanel/{{event.id}}" target="_blank">{{event.id}}.</a>    ||   {{event.eventname}}   || {{event.city}}
+</li>
+-->

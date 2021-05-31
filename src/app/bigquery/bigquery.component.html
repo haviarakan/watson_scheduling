@@ -1,0 +1,46 @@
+<h3>test query</h3>
+<button (click)="radndom1()"> paymentdue </button>
+<button (click)="getdata()" class="btn btn-success"> getdata </button>
+
+<table mat-table #table [dataSource]="dataSource" matSort>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-footer-cell *matFooterCellDef> Total </td>
+    </ng-container>
+    <ng-container matColumnDef="pp_totalpaid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> pp_totalpaid </th>
+        <td mat-cell *matCellDef="let element"> {{element.pp_totalpaid}} </td>
+        <td mat-footer-cell *matFooterCellDef>  </td>
+      </ng-container>
+    <ng-container matColumnDef="pp_totalpurchasevalue">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> pp_totalpurchasevalue</th>
+          <td mat-cell *matCellDef="let element"> {{ element.pp_totalpurchasevalue}}</td>
+          <td mat-footer-cell *matFooterCellDef>  </td>
+        </ng-container>
+    <ng-container matColumnDef="pp_installmentamount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> p_installmentamount</th>
+            <td mat-cell *matCellDef="let element">  {{ element.pp_installmentamount}}</td>
+            <td mat-footer-cell *matFooterCellDef>  </td>
+          </ng-container>
+    <ng-container matColumnDef="pp_lastpayment">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>pp_lastpayment </th>
+              <td mat-cell *matCellDef="let element"> {{ element.pp_lastpayment}}</td>
+              <td mat-footer-cell *matFooterCellDef>  </td>
+            </ng-container>
+      <ng-container matColumnDef="pp_status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> pp_status</th>
+                <td mat-cell *matCellDef="let element"> {{ element.pp_status}}</td>
+                <td mat-footer-cell *matFooterCellDef>  </td>
+              </ng-container>
+              
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky:true"></tr>
+  
+  </table>

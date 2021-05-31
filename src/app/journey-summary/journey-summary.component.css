@@ -1,0 +1,45 @@
+ :ng-multiselect-dropdown.multiselect-dropdown> .dropdown-btn {
+  width: 50%; 
+}
+.columnright {
+  /*    width: 45%; */
+        width: 65%;
+        float: right;
+        padding-bottom: .1rem;    
+    }
+    .container {
+      display: flex;
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+      width: 100%;
+      backface-visibility: hidden;
+      will-change: overflow;
+  }
+ 
+    .columnleft {
+
+      width: 100%;
+ -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  }
+    .columnright {
+
+      /*    width: 45%; */
+    padding-top:100%; 
+      padding: .1rem;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      
+      width: 35%;
+      }
+      
+      .columnleft::-webkit-scrollbar,
+      .columnright::-webkit-scrollbar,
+      {
+          display: none;
+      }
+    table {
+      width: 100%;
+    }
+    

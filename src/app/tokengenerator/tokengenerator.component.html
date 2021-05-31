@@ -1,0 +1,140 @@
+<div *ngIf="screen1" [ngClass]=" mobileversion ? 'mobile-background':'desktop-background'">
+        <img [ngClass]=" mobileversion ? 'mobile-logo fadein':'desktop-logo fadein'" alt="Launch Your Legacy" src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/AH%20Logo%20White%20Trans%20(1).png?alt=media&token=c7d8fe9d-1510-4410-8ac1-e21af2e61bdc"> 
+        <div class="fadein" *ngIf="!requestOTP_btn">
+          <label [ngClass]=" mobileversion ? 'mobile-email-lable':'desktop-email-lable'">
+            {{this.emaillable}}
+          </label>
+          <br><br>
+          <input [ngClass]=" mobileversion ? 'mobile-email-textbox':'desktop-email-textbox'" type="email" [(ngModel)]="email" name="email" placeholder="Enter Your Email-ID"/>
+          <button [ngClass]=" mobileversion ? 'mobile-email-ok':'desktop-email-ok'" (click)="submitemail()">></button>
+          <br><br>
+        </div>
+
+        <div class="fadein" *ngIf="requestOTP_btn">
+          <label [ngClass]=" mobileversion ? 'mobile-requestOTP-lable':'desktop-requestOTP-lable'">
+            {{this.otplable}}
+          </label>
+          <br><br>
+          
+          <button [ngClass]="mobileversion ? 'mobile-requestOTP-btn':'desktop-requestOTP-btn'" id="sendcode" (click)="sendemail(email)">Send Email</button>
+          <div *ngIf="internumber">
+            <input [ngClass]=" mobileversion ? 'mobile-email-textbox':'desktop-email-textbox'" type="text" [(ngModel)]="countrycode" name="code" placeholder="Enter country code eg:+91"/>
+          <button [ngClass]=" mobileversion ? 'mobile-email-ok':'desktop-email-ok'" (click)="addcountrycode()">></button>         
+          </div>
+          <button [ngClass]=" mobileversion ? 'mobile-requestOTP-btn':'desktop-requestOTP-btn'" id="sendcode" (click)="sendcode()" [disabled]='sendbtn'>Send OTP To Registered Mobile</button>
+          <div id="recaptcha-container"></div>
+          <br *ngIf="mobileversion">
+          <button *ngIf="otpDiv" [ngClass]=" mobileversion ? 'mobile-resendOTP-btn':'desktop-resendOTP-btn'" (click)="resendcode()" [disabled]="!sendbtn"><label class="fadein">Resend Code</label></button>
+          <br><br>
+        </div>
+        <div *ngIf="otpDiv" class="fadein">
+          <p *ngIf="this.time<300" [ngClass]=" mobileversion ? 'mobile-code-countdown':'desktop-code-countdown'">OTP expires in {{this.time}}s</p>
+          <br><br *ngIf="!mobileversion"><br *ngIf="!mobileversion">
+          
+          <div *ngIf="btntype=='mobile'">
+            <!-- <label for="code">Enter Your verification Code Here: </label> -->
+            <input [ngClass]=" mobileversion ? 'mobile-otp-textbox':'desktop-otp-textbox'" type="text" [(ngModel)]="verificationCode" name="code" placeholder="Enter Your Verification Code Here" /><br><br>
+            <button [ngClass]=" mobileversion ? 'mobile-verifyOTP':'desktop-verifyOTP'" (click)="verifycode()">Verify</button>
+          </div> 
+          <div *ngIf="btntype=='email'">
+            <label [ngClass]=" mobileversion ? 'mobile-requestOTP-lable':'desktop-requestOTP-lable'">{{this.emaillink}}</label>
+          </div>
+        </div>
+        <div *ngIf="mailerror">
+          Your E-mail ID does not exist. 
+      </div>
+      <br><br *ngIf="mobileversion"><br *ngIf="mobileversion"><br *ngIf="mobileversion"><br *ngIf="mobileversion"><br *ngIf="mobileversion"><br *ngIf="mobileversion">
+      <div [ngClass]="mobileversion ? 'mobile-bottom' : 'bottom'">
+          <p [ngClass]="mobileversion ? 'mobile-cp' : 'cp'">Secured By </p>
+          <img [ngClass]="mobileversion ? 'mobile-firebase':'firebase' "src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/kisspng-firebase-web-application-database-firebase-5b1fab8ba26487.3035804715288021876652.png?alt=media&token=e1c09e5c-af4a-4212-84a8-468cf0537c03" alt="Secured by FireBase">
+          &nbsp;<img [ngClass]="mobileversion ?'mobile-ssl':'ssl'" src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/ssl_badge.png?alt=media&token=ef4a2562-acf1-48e5-b232-2634e1a40d57" alt="SSL Secured"/>
+          <p [ngClass]="mobileversion ? 'mobile-cp' : 'cp'">Copyright © 2020 Antano & Harini. </p>
+        </div>
+    
+</div>
+
+        <div *ngIf="!screen1" [ngClass]=" mobileversion ? 's2-mobile-background':'s2-desktop-background'">
+                <img [ngClass]=" mobileversion ? 's2-mobile-logo fadein':'s2-desktop-logo fadein'" alt="Launch Your Legacy" src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/AH%20Logo%20White%20Trans%20(1).png?alt=media&token=c7d8fe9d-1510-4410-8ac1-e21af2e61bdc"> 
+                  
+                <div class="fadein">
+                    <b [ngClass]="mobileversion ? 's2-mobile-heading' : 's2-desktop-heading'">A&H CONSULTATION DASHBOARD</b>
+                    <br><br>
+                  <label [ngClass]="mobileversion ? 's2-mobile-username' : 's2-desktop-username'">Hello {{this.name}},</label>
+                  <div *ngIf=!screen3>
+                <div class="fadein">
+                    <div [ngClass]="mobileversion ? 's2-mobile-dropdown-menu' : 's2-desktop-dropdown-menu'">
+                      <label [ngClass]="mobileversion ? 's2-mobile-dropdown-label' : 's2-desktop-dropdown-label'">{{this.question1}}</label>
+                      <br *ngIf="mobileversion"><br *ngIf="mobileversion">
+                      <select [ngClass]="mobileversion ? 's2-mobile-dropdown-option' : 's2-desktop-dropdown-option'" name="type" [(ngModel)]="selectedtype" (click)="selecttype(value,email)">
+                        <option *ngFor="let list of type" [ngValue]="list"> 
+                          {{ list }}
+                         </option>
+                           <!-- {{this.selectedtype}} -->
+                      </select>
+                    </div>
+                    <div [ngClass]="mobileversion ? 's2-mobile-dropdown-menu' : 'ds2-esktop-dropdown-menu'">
+                      <label [ngClass]="mobileversion ? 's2-mobile-dropdown-label' : 's2-desktop-dropdown-label'">{{this.question2}}</label>
+                      <br *ngIf="mobileversion"><br *ngIf="mobileversion">
+                      <select [ngClass]="mobileversion ? 's2-mobile-dropdown-option' : 's2-desktop-dropdown-option'" name="cities" [(ngModel)]="selectedcity" (click)="selectcity()">
+                        <option *ngFor="let list of cities" [value]="list"> 
+                          {{list}}
+                         </option>
+                         <!-- {{this.selectedcity}} -->
+                      </select>
+                    </div>
+                  </div>
+                  <br *ngIf="!mobileversion">
+                  <button [ngClass]="mobileversion ? 's2-mobile-generate-code' : 's2-desktop-generate-code'" (click)="generatetoken1(email)"[disabled]="!selectedtype">Generate Token</button>
+                  <br><br><br *ngIf="!mobileversion">
+                  <div [ngClass]="mobileversion ? 's2-mobile-notes' : 's2-desktop-notes'">
+                   <label style="color:#0e0e0e ;margin-left: -30px;font-weight: bold">Please Note:</label>
+                    <ol style="padding-top:10px">
+                      <li *ngFor="let note of note1" style="line-height: 25px;">{{note}}</li>
+                      <a href="https://firebasestorage.googleapis.com/v0/b/watson-9878.appspot.com/o/Consultations%20-%20Reviews.pdf?alt=media&token=f9530a01-58f3-42c9-925b-1b75b41abab5" target="_blank">Click here.</a>
+                  </ol>
+                </div>
+              </div>
+                </div>
+
+              <div *ngIf="screen3" class="fadein">
+                <div [ngClass]="mobileversion ? 's2-mobile-notes' : 's2-desktop-notes'">
+                <label style="color:#0e0e0e; margin-left: -30px;font-weight: bold">{{this.selectedtype}} Summary: </label> 
+                <div *ngFor="let summary of ConsultationSummary;index as i" style="line-height: 32px;">
+                    <div *ngIf="i==0">
+                      <label style="color:#0e0e0e;"> {{summary}}</label> <b  style="color:#0e0e0e">{{this.selectedtype}}</b>
+                    </div>
+                    <div *ngIf="i==1">
+                         <b style="color:#0e0e0e"> {{this.token}}  </b> <label style="color:#0e0e0e"> {{summary}} </label> <b style="color: #0e0e0e"> {{this.selectedtype}} </b> - <b style="color:#0e0e0e">{{this.selectedcity}}</b>
+                    </div>
+                  </div>
+              
+                <br>
+            
+              <label style="color:#0e0e0e; margin-left: -30px;font-weight: bold" >Please Note:</label>
+              <ol style="padding-top:10px">
+                <li *ngFor="let note of note2" style="line-height: 25px;">{{note}}</li>
+                <a href="https://firebasestorage.googleapis.com/v0/b/watson-9878.appspot.com/o/Token%20System.pdf?alt=media&token=8f9fb29a-20d2-4908-96c3-3cd848970a53" target="_blank">Click here.</a>
+              </ol>
+              
+              </div>
+              </div>
+              <br><br>
+              <div [ngClass]="mobileversion ? 'mobile-bottom' : 'bottom'">
+                <p [ngClass]="mobileversion ? 'mobile-cp' : 'cp'">Secured By </p>
+                <img [ngClass]="mobileversion ? 'mobile-firebase':'firebase' "src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/kisspng-firebase-web-application-database-firebase-5b1fab8ba26487.3035804715288021876652.png?alt=media&token=e1c09e5c-af4a-4212-84a8-468cf0537c03" alt="Secured by FireBase">
+                &nbsp;<img [ngClass]="mobileversion ?'mobile-ssl':'ssl'" src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/ssl_badge.png?alt=media&token=ef4a2562-acf1-48e5-b232-2634e1a40d57" alt="SSL Secured"/>
+                <p [ngClass]="mobileversion ? 'mobile-cp' : 'cp'">Copyright © 2020 Antano & Harini.</p>
+              </div>
+          
+          </div>
+           
+             
+
+  
+ 
+  <script src="/__/firebase/6.5.0/firebase-app.js"></script>
+  <script src="/__/firebase/6.5.0/firebase-auth.js"></script>
+  <script src="/__/firebase/6.5.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase-database.js"></script>

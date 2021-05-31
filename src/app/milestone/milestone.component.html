@@ -1,0 +1,79 @@
+
+<div class="container">
+    <div class="columnleft">
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+   
+ <div #TABLE>
+                  
+  <table mat-table #table [dataSource]="dataSource" matSort>
+
+<ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> 
+     {{element.name}} </td>
+    <td mat-footer-cell *matFooterCellDef>  </td>
+</ng-container>
+<ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email-Id </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> 
+     {{element.email}} </td>
+    <td mat-footer-cell *matFooterCellDef>  </td>
+</ng-container>
+<ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> PhoneNumber </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> 
+     {{element.phone}} </td>
+    <td mat-footer-cell *matFooterCellDef>  </td>
+</ng-container>
+<ng-container matColumnDef="Milestone Attended">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Milestone Attended</th>
+  <td mat-cell *matCellDef="let element"> 
+      {{element.milestone}}</td>
+  <td mat-footer-cell *matFooterCellDef>  </td>
+</ng-container>
+<ng-container matColumnDef="EIT Eductation Status">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> EIT Eductation Status </th>
+  <td mat-cell *matCellDef="let element" > 
+      {{element.eit_status}} </td>
+  <td mat-footer-cell *matFooterCellDef>  </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" ></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<tr mat-footer-row *matFooterRowDef="displayedColumns; sticky:true"></tr>
+
+</table>
+<button mat-raised-button color="primary" (click)="ExportCSV()">Export CSV</button>
+ </div>
+    </div>
+<div class="columnright" *ngIf="currentparticipant">
+    <div *ngIf="(currentparticipant.participant | async ) as participantdetails">
+     <div><b>{{participantdetails.name}}</b>  </div>
+    
+     
+        <br>EIT Education Status:{{participantdetails.eit_status}}<br>
+        <select name="eitstatus" [(ngModel)]="selectedstatus" (click)="selectstatus(value)">
+            <option *ngFor="let list of eitstatus" [ngValue]="list">
+                {{ list }}
+              </option>
+              </select>
+        <button type="submit" class="btn btn-success" (click)="updateuser(participantdetails)">update status</button>
+        <br>
+        Milestone Attended:
+        <ng-multiselect-dropdown
+        [placeholder]="'milestone'" 
+        [data]="miles" 
+        [(ngModel)]="mileupdate"
+        [ngModelOptions]="{standalone: true}" 
+        [settings]="dropdownSettings"
+        (onSelect)="onItemSelect($event)" 
+       >
+       </ng-multiselect-dropdown>
+       <button type="submit" class="btn btn-success" (click)="updatemile(participantdetails)">update Milestone</button>
+        
+      </div>
+
+</div>
+</div>

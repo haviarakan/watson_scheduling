@@ -1,0 +1,38 @@
+
+  <span *ngFor="let formque of formsque| async"> 
+    {{formque.order}}  {{formque.lable}}
+  
+      <li *ngIf="formque.type === 'dropdown'"><span>
+        <select name="option" [(ngModel)]="selectoption" (click)="selectedoption()" >
+          <option *ngFor="let options of formque.Answeroption" [ngValue]="options">
+            {{options}}
+          </option>
+          {{this.selectoption}}
+        </select>
+           </span>
+        </li>
+        <div *ngIf="formque.type === 'longtext'"><span>
+          <textarea type="text" [(ngModel)]="textinput" name="type" placeholder="textarea" >{{types}}</textarea>
+        </span>
+      </div>
+      <li *ngIf="formque.type === 'smalltext'"><span>
+        <input type="text" [(ngModel)]="input" name="type" placeholder="input" required/>
+      </span>
+      </li>
+        <div *ngIf="formque.type === 'checkbox'"><span>
+          <li *ngFor="let option of formque.Answeroption ">
+          <input type="checkbox" (change)="onchange(option,$event.target.checked)" >{{option}}<br>
+          </li>
+           </span>
+          </div> 
+         
+        </span>
+      <br>
+
+  <span (click)="displaytemplate()" class="buttonSpan">Add Fields</span>
+      
+  
+  
+
+
+

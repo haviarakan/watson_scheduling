@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+  }
+  
+  #k th {
+    font-size: 14px;
+    font-weight: bolder;
+    text-align: center;
+    background-color: rgba(0, 81, 255, 0.548);
+  }
+  
+  #k tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  /* #k td:nth-child(odd){background-color: #f2f2f2;} */
+  /* #k {
+    text-align: center;
+  } */
+  .headingContainer {
+   
+    font-size: 32px;
+    letter-spacing: 6px;
+  }
+  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  

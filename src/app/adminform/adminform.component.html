@@ -1,0 +1,15 @@
+<form  #Admin="ngForm">
+
+  <input type="text" [(ngModel)]="adminform.name" name="Name" required placeholder="Name"/>
+  <br>
+  <input type="text" [(ngModel)]="adminform.Description" name="Description" required placeholder="Description"/>
+  <br>
+  <button (click)="formcontinue()" class="btn btn-success" [disabled]="!Admin.form.valid">Continue</button>
+   
+</form>
+
+<li *ngFor="let form of forms | async"><span (dblclick)="formlook(form)">
+    {{form.name}} | {{form.id}}
+    </span>
+</li>
+

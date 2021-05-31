@@ -1,0 +1,78 @@
+/* Unable to hide the scrollbar */
+
+.top {
+display: flex;
+position: relative;
+z-index: 100;
+background-color: #ffffff;
+height: 80px;
+padding-top: 10px;
+}
+
+
+.container {
+    display: flex;
+    overflow: hidden;
+    height: 100vh;
+    margin-top: -100px;
+    padding-top: 100px;
+    position: relative;
+    width: 100%;
+    backface-visibility: hidden;
+    will-change: overflow;
+}
+
+
+.columnleft {
+
+    width: 60%;
+
+overflow: auto;
+height: auto;
+padding: .5rem;
+-webkit-overflow-scrolling: touch;
+-ms-overflow-style: none;
+}
+
+.columnright {
+
+/*    width: 45%; */
+
+overflow: auto;
+
+padding: .5rem;
+-webkit-overflow-scrolling: touch;
+-ms-overflow-style: none;
+
+width: 35%;
+}
+
+
+.columnleft::-webkit-scrollbar,
+.columnright::-webkit-scrollbar
+{
+    display: none;
+}
+
+table {
+  width: 100%;
+}
+
+
+
+
+
+
+
+body {
+  overflow-x: hidden;
+}
+
+.controlroom {
+  padding-left: 50px;
+}
+
+.btn{
+  margin: 2px;
+
+}

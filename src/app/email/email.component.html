@@ -1,0 +1,40 @@
+<!--<select  name="status" [(ngModel)]="selectstatus">  
+    <option *ngFor="let list of status" [ngValue]="list" > 
+    {{ list }}
+  </option>
+  </select>
+
+  <button (click)="filteremail()" class="btn btn-success">selectedemails</button>
+
+  <br><br>-->
+
+<!-- <form  #email="ngForm">
+<input type="text" [(ngModel)]="event.emaillist" name="emaillist"  required  placeholder="emaillistcollection">
+<input type="text" [(ngModel)]="event.subject" name="subject"  required  placeholder="subject"><br>
+<app-ngx-editor  name="message" style="height: 80px;"[placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="event.message" ></app-ngx-editor>
+<div ></div>
+<input type="number" [(ngModel)]="event.templateid" name="templateid"  required  placeholder="templateid"><br>
+<button (click)="sendbatchmail()" type="button" class="btn btn-success" [disabled]="!email.form.valid"> sendmail </button>
+</form> -->
+
+
+ <form  [formGroup] = "emailform" >
+  <h2>Email</h2>
+  <input type="text" formControlName="emaillist" placeholder="emaillistcollection" required>
+  <br>
+  <input type="number" formControlName="subject" placeholder="subject" required>
+  <br>
+  <input type="password" formControlName="templateid" placeholder="templateid" required>
+  <br>
+  <div>
+  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+  <ngx-editor [editor]="editor" formControlName="message" style="height: 80px;"[placeholder]="'Enter text here...'" [(ngModel)]="message"></ngx-editor> 
+</div>
+<br>
+<button type="submit" (click)="sendbatchmail(emailform.value)">sendmail</button>
+  </form>
+   
+   <!-- <form  [formGroup] = "emailform">
+    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+   <ngx-editor [editor]="editor" formControlName="message" style="height: 80px;"[placeholder]="'Enter text here...'" [ngModel]="message"></ngx-editor> 
+</form> -->

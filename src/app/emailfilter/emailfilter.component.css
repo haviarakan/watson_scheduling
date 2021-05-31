@@ -1,0 +1,19 @@
+.mat-row {
+    height: auto;
+  }
+  
+  .mat-cell {
+    padding: 10px 10px 10px 0;
+  }
+  textarea{
+   
+    border-bottom: 2px solid rgb(230, 230, 230);
+    outline: rgb(240, 240, 240);
+    margin-left: 0%;
+    width:600px;
+    display: block;
+    height: 200px;
+}
+.multiselect-dropdown {
+  width:50%;
+}

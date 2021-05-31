@@ -1,0 +1,72 @@
+<div class="bg">
+  <div class="top">
+      <img class="ah" src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/AH%20Logo%20White%20Trans.png?alt=media&token=dba7f27f-e755-4a39-bdbb-bdd7c40431b7" alt="Antano & Harini"/><!--[if mso]></td></tr></table><![endif]-->
+
+  </div>
+<br><br><br>
+
+<form class="form" [formGroup]="fillform" (ngSubmit)=confirm(fillform.value)><br>
+  <div *ngIf="this.Email">
+
+<p>Email: {{this.Email}}<br></p>
+  <p> Number: {{this.number}}</p>
+  <br> 
+
+ <p> Hi  <b>{{this.name}}, </b></p>
+ <div *ngIf="!this.emailid">
+<P><strong>How do you want to prepare for this uP! event in FEB 2020?</strong></P>
+
+<p>Most Participants will only require a Review with A&H unless there is a very specific business or family situation to which they want to find a solution. So if you are not sure if you will need a Consultation or a Review, request for a Review in the below form.</p>
+<p>As a A&H Fast Track Member, if you have already completed your Review within the last 3 months, you can also opt for a 'Complimentary ATC' with an EIS instead of using another Review from your package. And in this case, select 'Complimentary ATC' in Question 1 below.</p>
+<p>For uP! Participants who are not A&H Fast Track Members yet, you can opt for a 'Complimentary ATC' with an EIS. If you want a Review or a Consultation with A&H, please select the appropriate option below and our support team will contact you with the Consultation/Review upgrade options.</p>
+<p class="note">Note: ATC list is always done only by the EIS. In the Review and Consultation, A&H will review this list and add any critical adjustments you require. A Review is specifically recommended if you have not met A&H in the last 4 months as it also gives a context update to A&H for planning tailored Installations necessary for you at the event.
+Complimetary ATC will most likely happen on Skype in the first week of January 2020.</p>
+
+
+          <p><strong>1. Consultation with A&H or Review with A&H or Complimentary ATC</strong></p>
+              <select class="drop" placeholder=" " formControlName="type" [(ngModel)]="selectedtype" (click)="selecttype()">  
+                      <option *ngFor="let list of type"[ngValue]="list"> 
+                      {{ list }}
+                    </option>
+                    {{this.selectedtype}}
+                  </select> 
+          <br>
+          <p><strong>2. Which City is your preferred City for your Consultation / Review with A&H / Complimentary ATC?</strong></p>
+          <select class="drop" placeholder=" " formControlName="cities" [(ngModel)]="selectedcity" (click)="selectcity()">  
+            <option *ngFor="let list of cities" [ngValue]="list"> 
+            {{ list }}
+          </option>
+          {{this.selectedcity}}
+        </select> 
+       <br>
+       <p><strong>3. What were the Action Items mentioned in the previous Review with Antano & Harini? Please Provide an update on How much you have completed them.  </strong></p>
+       <textarea [(ngModel)]="form.message" formControlName="message" required ></textarea><br>
+    <p><strong>4. Are there any Unforseen dire situational changes in your life that needs urgent attention? If yes, please provide information briefly.</strong></p>
+    <textarea [(ngModel)]="form.comment" formControlName="comment" required  ></textarea><br>
+    <p><strong>5. I Confirm my Participation for</strong></p>
+     <select class="drop" placeholder="" formControlName="event" [(ngModel)]="selectedevent" (click)="selectevent()">  
+        <option *ngFor="let list of event" [ngValue]="list"> 
+        {{ list }}
+      </option>
+      {{this.selectedevent}}
+    </select> 
+    <br>
+    <br>
+    <button type="submit">Submit</button><br><br>  
+</div>
+<div *ngIf="this.emailid" style="text-align:center;">
+  <span style="font-size:30px;font-weight:bold; border: none; font-family:  Arial, Helvetica, sans-serif">Your form has been submitted already</span><br><br><br><br><br><br>
+</div>
+</div>
+<div *ngIf="!this.Email" style="text-align:center;">
+    <span style="margin: 3%; font-size:30px;font-weight:bold; border: none; font-family:  Arial, Helvetica, sans-serif">Your E-mail ID does not exist. <br> Please contact support@soexcellence.com <br><br> </span>
+</div>
+</form>
+  <div class="bottom">
+      <p class="cp">Secured By </p>
+      <img class="firebase" src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/kisspng-firebase-web-application-database-firebase-5b1fab8ba26487.3035804715288021876652.png?alt=media&token=e1c09e5c-af4a-4212-84a8-468cf0537c03" alt="Secured by FireBase">
+      &nbsp;<img class="ssl" src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/ssl_badge.png?alt=media&token=ef4a2562-acf1-48e5-b232-2634e1a40d57" alt="SSL Secured"/>
+      <p class="cp">COPYRIGHT © 2019. ANTANO & HARINI</p>
+    </div>
+
+</div>

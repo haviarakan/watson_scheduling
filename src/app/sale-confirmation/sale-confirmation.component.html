@@ -1,0 +1,243 @@
+<!-- <p>sale-confirmation works!</p> -->
+<header class="sticky">
+    <mat-toolbar style="justify-content: center;" color="">
+      <span class="headingContainer">SALE CONFIRMATION FORM</span>
+    </mat-toolbar>
+  </header>
+  <div>
+    <!-- <div class="sticky1">{{ confirmationGroup.value | json }}</div> -->
+    <form
+      [formGroup]="confirmationGroup"
+      class="container"
+      (ngSubmit)="onSubmit(confirmationGroup.value)"
+    >
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Name of Client"
+          formControlName="firstName"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Name of Client"
+          formControlName="lastName"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder="Email"
+          formControlName="email"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Phone Number</mat-label>
+        <input
+          type="tel"
+          matInput
+          placeholder="Phone Number"
+          formControlName="phoneNumber"
+          minlength="10"
+          maxlength="10"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Token Amount</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="Amount"
+          formControlName="tokenAmount"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Sale Date</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Date of Sale"
+          formControlName="saleDate"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Product</mat-label>
+        <mat-select formControlName="product" (selectionChange)="onProductSelect($event.value)">
+          <mat-option *ngFor="let package of list" [value]="package">{{
+            package
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Closed Price</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="closed price Amount"
+          formControlName="closedPrice"
+          (change)="onpricechange($event.target.value)"
+          required
+        />
+        
+      </mat-form-field>
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Total Price</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="Add Amount Including GST"
+          formControlName="totalPrice"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Consultation Packages</mat-label>
+        <mat-select formControlName="consultationPackage">
+          <mat-option *ngFor="let package of packages" [value]="package">{{
+            package
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Review Packages</mat-label>
+        <mat-select formControlName="reviewPackage">
+          <mat-option *ngFor="let package of packagess" [value]="package">{{
+            package
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      {{selected}}
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Sales Person Name</mat-label>
+        <mat-select formControlName="salesPersonName">
+          <mat-option *ngFor="let name of salesName" [value]="name">{{
+            name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field> 
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Date In Which Lead Came</mat-label>
+        <input
+          type="date"
+          matInput
+          placeholder="Date in Which lead came"
+          formControlName="dateInWhichLeadCame"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Product Validity</mat-label>
+        <input
+          type="date"
+          matInput
+          placeholder="Product Validity Date"
+          formControlName="productValidity"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Bonus</mat-label>
+        <mat-select formControlName="bonus">
+          <mat-option *ngFor="let bonus of bonuspackage" [value]="bonus">{{
+            bonus
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Payment Status</mat-label>
+        <mat-select formControlName="paymentStatus" (selectionChange)="onselected($event.value)">
+          <mat-option *ngFor="let item of paymentStatus" [value]="item">{{
+            item
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="paymentStatusSelected" class="ifcontainer">
+
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>Minimum amount required to start the Pre-Delivery</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="Amount"
+          formControlName="preDeliveryMinimumAmount"
+          required
+        />
+      </mat-form-field>
+  
+    
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>EMI Start Date(From Which Month)</mat-label>
+        <input
+          type="date"
+          matInput
+          placeholder="EMI_Start_Date"
+          formControlName="EMI_Start_Date"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>EMI Date </mat-label>
+        <input
+          type="date"
+          matInput
+          placeholder="EMI_Date"
+          formControlName="EMI_Date"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field class="textField" appearance="fill">
+        <mat-label>EMI Amount</mat-label>
+        <input
+          type="number"
+          matInput
+          placeholder="EMI_Amount"
+          formControlName="EMI_Amount"
+          required
+        />
+      </mat-form-field>
+
+    </div>
+  
+     
+  
+      <button
+        type="submit"
+        class="buttonSizeChange"
+        mat-raised-button
+        color="primary"
+        [disabled]="confirmationGroup.invalid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+  

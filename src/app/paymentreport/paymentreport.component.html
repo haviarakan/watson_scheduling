@@ -1,0 +1,67 @@
+<div #TABLE>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="purchasedate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchase Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.purchasedate}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="lastpaymentdate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Payment </th>
+    <td mat-cell *matCellDef="let element"> {{element.lastpaymentdate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="emi">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMI </th>
+    <td mat-cell *matCellDef="let element"> {{element.emi}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="emiduetilldate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMI DTD </th>
+    <td mat-cell *matCellDef="let element"> {{element.emiduetilldate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="emipaid">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMI Paid </th>
+    <td mat-cell *matCellDef="let element"> {{element.emipaid}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="emimissed">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMI Missed </th>
+    <td mat-cell *matCellDef="let element"> {{element.emimissed}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="emiamountdue">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount DTD </th>
+    <td mat-cell *matCellDef="let element"> {{element.emiamountdue}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="emiamountpaid">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Paid </th>
+    <td mat-cell *matCellDef="let element"> {{element.emiamountpaid}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="emioverdue">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Overdue </th>
+    <td mat-cell *matCellDef="let element"> {{element.emioverdue}} </td>
+  </ng-container>
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
+
+<button mat-raised-button color="primary" (click)="ExportCSV()">Export CSV</button>

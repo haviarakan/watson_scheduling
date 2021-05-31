@@ -1,0 +1,18 @@
+<div [hidden]="!this.loggedin" >
+    <input type="number" [(ngModel)]="number" name="number" class="input" />
+            <button (click)="open()"[hidden]="!this.loggedin">open</button>
+</div>
+ <div *ngIf="this.userexist">
+<div  style="padding:56.25% 0 0 0;position:relative">
+  <iframe [src]="Url" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%">
+  </iframe>
+</div>
+ </div>
+   <div *ngIf="this.docexist">
+  {{this.Error}} 
+</div>
+
+     
+  
+      
+     

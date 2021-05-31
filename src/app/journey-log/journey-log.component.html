@@ -1,0 +1,73 @@
+
+ <mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+ 
+    <div #TABLE>
+      
+        
+    <table mat-table #table [dataSource]="dataSource" matSort>
+  
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element" (dblclick)="showfulldetails(element)" (click)="showdetails(element)"> {{element.name}} </td>
+      <td mat-footer-cell *matFooterCellDef>  </td>
+  </ng-container>
+  <ng-container matColumnDef="consultation_taken">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Consultation Taken </th>
+    <td mat-cell *matCellDef="let element" (dblclick)="showfulldetails(element)"> {{element.consultation_taken}} </td>
+    <td mat-footer-cell *matFooterCellDef>  </td>
+  </ng-container>
+  <ng-container matColumnDef="review_taken">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Reviews Taken </th>
+    <td mat-cell *matCellDef="let element" (dblclick)="showfulldetails(element)"> {{element.review_taken}} </td>
+    <td mat-footer-cell *matFooterCellDef>  </td>
+  </ng-container>
+    <ng-container matColumnDef="total_consultations">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Consultations</th>
+      <td mat-cell *matCellDef="let element" (dblclick)="showfulldetails(element)"> {{element.total_consultations}} </td>
+      <td mat-footer-cell *matFooterCellDef>  </td>
+    </ng-container>
+    <ng-container matColumnDef="total_review">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Review </th>
+      <td mat-cell *matCellDef="let element" (dblclick)="showfulldetails(element)" > {{element.total_review}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+    <ng-container matColumnDef="first_consultation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> first consultation </th>
+      <td mat-cell *matCellDef="let element" (dblclick)="showfulldetails(element)"> {{element.first_consultation}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+    <ng-container matColumnDef="recent_consultation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Recent consultation </th>
+      <td mat-cell *matCellDef="let element" (dblclick)="showfulldetails(element)" > {{element.recent_consultation}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+    <ng-container matColumnDef="validty">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Validty </th>
+      <td mat-cell *matCellDef="let element" (dblclick)="showfulldetails(element)"> {{element.validty}} </td>
+      <td mat-footer-cell *matFooterCellDef>  </td>
+    </ng-container>
+  
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky:true"></tr>
+  
+  </table>
+
+ 
+  
+  <!--
+  participant listing before mat
+  <ul> <li  class="text" *ngFor="let participant of participants | async"> <span (click)="showparticipant(participant)">
+  {{participant.name }} | {{participant.recentpurchase}} | {{participant.pp_totalpaid}} | {{participant.pp_balance}} | {{participant.pp_installmentamount}}</span></li></ul>
+  -->
+  <button mat-raised-button color="primary" (click)="ExportCSV()">Export CSV</button>
+  
+  
+  

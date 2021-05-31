@@ -1,0 +1,264 @@
+<div *ngIf="(auth.user | async)?.role=='superadmin'">
+<div>  <span style="font-size: 120%; font-weight: bold;">Watson HQ (0.002)({{(defaults | async)?.server}})</span><div style="text-align:right; float: right">Welcome <b> {{(auth.user|async)?.displayName}} </b> :) </div></div>
+
+<div class="top">
+<button [hidden]="formshow" (click)="showform()" class="btn btn-success">Show Form</button>
+<form  #participantForm="ngForm" [hidden]="!formshow">
+<div>
+<span>
+  <!-- <input type="text" class="form-control" id="name"
+       required
+       [(ngModel)]="model.name" name="name"
+       #name="ngModel"> -->
+<input type="text" [(ngModel)]="user.firstname" name="Name" minlength="4" required  placeholder="First Name"/>
+<input type="text" [(ngModel)]="user.lastname" name="Last Name" minlength="3" required  placeholder="Last Name"/>
+<input type="text" [(ngModel)]="user.email" name="Email" placeholder="Email" required email />
+<input type="number" [(ngModel)]="user.phone" name="Phone" minlength="10" required  placeholder="Phone"/>
+<select name="product" [(ngModel)]="purchase.product">
+  <option *ngFor="let product of products" [ngValue]="product">
+    {{ product }}
+  </option>
+</select>
+<br>
+
+
+<input type="date" [(ngModel)]="purchase.purchasedate" name="purchasedate" required placeholder="Purchase Date" />
+<input type="number" [(ngModel)]="purchase.fee"  name="fee" required minlength="6" placeholder="Fee" />
+<input type="number" [(ngModel)]="paymentplan.initialpayment" name="initialpayment" required minlength="4" placeholder="Initial Payment"/>
+<input type="number" [(ngModel)]="paymentplan.installmentamount" name="initialpayment" required  placeholder="Installment Value"/>
+<input type="number" [(ngModel)]="paymentplan.paymentday" name = "paymentday" required placeholder="Payment Day"/>
+<input type="text" [(ngModel)]="user.billingemail" name="billingEmail" placeholder="billingEmail"/>
+<div  [hidden]="!billingshow">
+<!-- <app-ngx-editor  name="billingaddress" style="height: 80px;" [placeholder]="'Enter text here...'" [spellcheck]="true" [ngModelOptions]="{standalone: true}" [ngModel]="user.billingaddress"></app-ngx-editor> -->
+<!-- <textarea type="text" [(ngModel)]="user.billingaddress" name="billingaddress" placeholder="'Enter text here...'" ></textarea> -->
+<form  [formGroup] = "userform">
+  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu> 
+  <ngx-editor [editor]="editor" formControlName="billingaddress" [placeholder]="'Enter text here...'" [(ngModel)]="user.billingaddress"></ngx-editor> 
+  
+</form>
+
+</div>
+<div [hidden]="billingshow">
+</div>
+<button (click)="togglebilling()" class="btn btn-success">Toggle GST</button>
+<button (click)="newparticipant(false)" type="Add" class="btn btn-success" [disabled]="!participantForm.form.valid">Add</button>
+<button (click)="newparticipant(true)" type="Add (Fluid)" class="btn btn-success" [disabled]="!participantForm.form.valid">Add (Fluid)</button>
+<button (click)="testdata()" type="test" class="btn btn-success" >Test Data</button>
+<button (click)="showform()" class="btn btn-success">Fullscreen</button>
+
+</span>
+</div>
+</form>
+</div>
+  
+Result: {{dataSource.filteredData.length}} Participants
+<div class="container">
+<div class="columnleft">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <!--
+  <select name="pp_status" [(ngModel)]="pp_status" (click)="filter()" >
+    <option *ngFor="let item of statuslist" [ngValue]="item">
+      {{ item }}
+    </option>
+  </select>
+-->
+  <div #TABLE>
+  <table mat-table #table [dataSource]="dataSource" matSort>
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)" (dblclick)="showfulldetails(element)"> {{element.name}} </td>
+    <td mat-footer-cell *matFooterCellDef> Total </td>
+  </ng-container>
+  <ng-container matColumnDef="recentpurchase">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Product </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> {{element.recentpurchase}} </td>
+    <td mat-footer-cell *matFooterCellDef>  </td>
+  </ng-container>
+  <ng-container matColumnDef="pp_totalpurchasevalue">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchase Value</th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> {{element.pp_totalpurchasevalue}} </td>
+    <td mat-footer-cell *matFooterCellDef>{{totalpurchasevalue() | currency: 'INR' : 'symbol' : '1.0-0' }}  </td>
+  </ng-container>
+  <ng-container matColumnDef="pp_totalpaid">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Paid </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> {{element.pp_totalpaid}} </td>
+    <td mat-footer-cell *matFooterCellDef> {{totalpaid() | currency: 'INR' : 'symbol' : '1.0-0'}} </td>
+  </ng-container>
+  <ng-container matColumnDef="pp_balance">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> {{element.pp_balance}} </td>
+    <td mat-footer-cell *matFooterCellDef> {{totalbalance() | currency: 'INR' : 'symbol' : '1.0-0'}} </td>
+  </ng-container>
+  <ng-container matColumnDef="pp_installmentamount">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMI </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> {{element.pp_installmentamount }} </td>
+    <td mat-footer-cell *matFooterCellDef>{{emitotal() | currency: 'INR': 'symbol': '1.0-0'}}  </td>
+  </ng-container>
+  <ng-container matColumnDef="pp_status">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+    <td mat-cell *matCellDef="let element" (click)="showparticipant(element)"> {{element.pp_status }} </td>
+    <td mat-footer-cell *matFooterCellDef>  </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" ></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky:true"></tr>
+
+</table>
+</div>
+
+
+<!--
+participant listing before mat
+<ul> <li  class="text" *ngFor="let participant of participants | async"> <span (click)="showparticipant(participant)">
+{{participant.name }} | {{participant.recentpurchase}} | {{participant.pp_totalpaid}} | {{participant.pp_balance}} | {{participant.pp_installmentamount}}</span></li></ul>
+-->
+<button mat-raised-button color="primary" (click)="ExportCSV()">Export CSV</button>
+</div>
+
+<div class="columnright" *ngIf="currentparticipant">
+
+  <form  #updateparticipantForm="ngForm">
+  <input type="text" [(ngModel)]="updateuser.firstname" name="newfname" minlength="4" required  placeholder="First Name"/>
+  <input type="text" [(ngModel)]="updateuser.lastname" name="newlname" minlength="3" required  placeholder="Last Name"/>
+  <input type="text" [(ngModel)]="updateuser.email" name="newemail"  placeholder="Email" required email />
+  <input type="number" [(ngModel)]="updateuser.phone" name="newphone" minlength="10" required  placeholder="Phone"/>
+  <input type="text" [(ngModel)]="updateuser.billingemail" name="billingemail" minlength="3"  placeholder="billingemail"/>
+ <!-- <app-ngx-editor [hidden]="!billingshow"  style="height: 80px;"[placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="updateuser.billingaddress"></app-ngx-editor> 
+  <textarea type="text" [hidden]="!billingshow" [(ngModel)]="updateuser.billingaddress" name="billingaddress" placeholder="'Enter text here...'" > </textarea> -->
+  <div [hidden]="!billingshow1">
+  <form  [formGroup] = "userform">
+    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu> 
+    <ngx-editor [editor]="editor" formControlName="editbillingaddress" style="height: 50px;"[placeholder]="'Enter text here...'" [(ngModel)]="updateuser.billingaddress"></ngx-editor> 
+    
+  </form></div>
+  <div [hidden]="billingshow1"></div>
+  <button (click)="updateparticipant(currentparticipant)" type="submit" class="btn btn-success" [disabled]="!updateparticipantForm.form.valid">update</button>
+  <button (click)="togglebilling1()" class="btn btn-success">Toggle GST</button>
+  </form>
+  
+<div *ngIf="(currentparticipant.participant | async ) as participantdetails">
+<div><b>{{participantdetails.name}}</b> <span (click)="edituser(participantdetails)">  edit</span></div>
+<br>
+<div>
+{{participantdetails.recentpurchase}} ||
+Email: {{participantdetails.email}} ||
+Phone: {{participantdetails.phone}}
+</div>
+
+
+<div>
+  <pre>
+  Status: {{participantdetails.pp_status}} <select name="pp_status" [(ngModel)]="pp_status">
+    <option *ngFor="let item of statuslist" [ngValue]="item">
+      {{ item }}
+    </option>
+  </select><button type="submit" class="btn btn-success" (click)="update_ppstatus(currentparticipant)">update status</button>
+  Balance: Rs. {{participantdetails.pp_balance}} + gst
+  Payment Day: {{participantdetails.pp_paymentday}}
+  EMI: Rs. {{participantdetails.pp_installmentamount}}<input type="number" [(ngModel)]="pp_installmentamount" name="initialpayment" required  placeholder="Installment Value"/>
+  <button type="submit" class="but-success" (click)="Editemi(participantdetails)">Edit</button><button type="submit" class="but-success" (click)="updateemi(currentparticipant)">updateemi</button>
+  Installments Due: {{participantdetails.pp_installmentsdue}}
+  Last Payment: {{participantdetails.pp_lastpayment}}
+  Total Paid: {{participantdetails.pp_totalpaid}}
+  <span *ngIf="participantdetails.chequecount">
+  Cheques: {{participantdetails.chequecount}}
+  Cheque Value: Rs. {{participantdetails.chequevalue}}
+  </span>
+
+  Remarks:{{participantdetails.Remarks}}
+  <input type="text" [(ngModel)]="remarks" name="Remarks" required  placeholder="Remark"/>
+  <button (click)="addremarks(remarks,currentparticipant,participantdetails)" class="btn btn-success"> Add </button>
+    
+</pre>
+<span *ngIf="participantdetails.billingaddress">
+Billing Address:
+<div [innerHTML]="participantdetails.billingaddress"></div>
+</span>
+
+<span>
+  Billing Email: <div [innerHTML]="participantdetails.billingemail"></div>
+</span>
+</div>
+<div class="btn">
+<h4>Payments</h4>
+<li *ngFor="let payment of currentparticipant.payments | async">
+   Receipt: Rs. {{payment.receipt}} || Fee: Rs. {{payment.fee}} || GST: {{payment.gst}}  : {{payment.date}}
+                                                             
+
+  <button type="button" class="btn btn-success" [disabled]="!payment.invoiceid" (click)="invoice(payment,participantdetails,11370345)">Send IGST Invoice</button>
+ 
+  <button type="button" class="btn btn-success" [disabled]="!payment.invoiceid" (click)="invoice(payment,participantdetails,11371815)">Send CGST/SGST Invoice</button>
+  
+    <span *ngIf="payment.fluid" style="color: #7A3803">
+      <b>(fl)</b>
+    </span>
+  <span (click)="deletepayment(payment)" style="Padding-left:20px;">
+     [delete]
+   </span>
+
+ </li>
+<br>
+
+<form (ngSubmit)="addpayment(currentparticipant)" #paymentForm="ngForm">
+   <input type="date" [(ngModel)]="newpayment.date" name="purchasedate" required placeholder="Payment Date" />
+   <input type="number" [(ngModel)]="newpayment.receipt"  name="fee" required minlength="4" placeholder="Receipt" />
+<button type="submit" class="btn btn-success" [disabled]="!paymentForm.form.valid">Confirm Payment</button>
+</form>
+</div>
+
+<div>
+<h4>Purchases</h4>
+<li *ngFor="let purchase of currentparticipant.purchases | async">
+   **{{purchase.product}}** Rs. {{purchase.fee}} :
+   {{purchase.purchasedate}} <span (click)="deletepurchase(purchase)" style="Padding-left:20px;"> [delete] </span>
+  </li>
+<br>
+  <form (ngSubmit)="addpurchase(currentparticipant)" #purchaseForm="ngForm">
+  <input type="date" [(ngModel)]="newpurchase.purchasedate" name="purchasedate" required placeholder="Purchase Date" />
+  <input type="number" [(ngModel)]="newpurchase.fee"  name="fee" required minlength="6" placeholder="Purchase Price" />
+  <input type="number" [(ngModel)]="newpurchase.initialpayment"  name="receipt" required minlength="6" placeholder="Initial Payment" />
+  <select name="product" [(ngModel)]="newpurchase.product">
+    <option *ngFor="let product of products" [ngValue]="product">
+      {{ product }}
+    </option>
+  </select>
+<button type="submit" class="btn btn-success" [disabled]="!purchaseForm.form.valid">Confirm Payment</button>
+</form>
+</div>
+
+<div>
+<h4>Cheques</h4>
+
+<br>
+<form (ngSubmit)="addcheques(currentparticipant)" #chequeForm="ngForm">
+   <input type="number" [(ngModel)]="cheque.count" name="purchasedate" required placeholder="Cheque Count" />
+   <input type="number" [(ngModel)]="cheque.value"  name="fee" required minlength="4" placeholder="Cheque Value" />
+<button type="submit" class="btn btn-success" [disabled]="!chequeForm.form.valid">Confirm Cheques</button>
+<br>
+</form>
+<button (click)="clearcheques(currentparticipant)">Clear Cheques</button>
+</div>
+
+<br>
+<input type="password" [(ngModel)]="getpwd" name="getpwd" placeholder="password"/>
+<button [disabled]="!getpwd" (click)="checkpassword(getpwd)">check</button>
+<button [disabled]="bntdisable" (click)="deleteparticipants(getpwd,currentparticipant)" >Delete {{currentparticipant.participant.name}} Record </button>
+
+</div>
+</div> <!-- columnright -->
+</div> <!-- container -->
+</div>
+
+<div *ngIf="(auth.user | async)?.role!='superadmin'">
+  Are you sure, you are a Watson Super Admin?
+</div>
+<div style="text-align:right" (click)="auth.signOut()">logout</div>
+

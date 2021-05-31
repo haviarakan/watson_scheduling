@@ -1,0 +1,54 @@
+
+<h1 mat-dialog-title class="formdialog"> Add New E.I.S</h1>
+
+<div  mat-dialog-content  class="formleftdialog">
+
+<div [formGroup]="addneweisForm" class="formdialog">
+    <div class="formleftdialog"> 
+        
+        <mat-form-field appearance="outline" class="textField">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput formControlName="name" placeholder="Enter name">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="textField" >
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName = "email" placeholder="Enter email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="textField">
+            <mat-label>Phone Number</mat-label>
+            <input type="tel" formControlName="phonenumber" matInput minlength="10" maxlength="10" placeholder="Enter Phone Number">
+        </mat-form-field>
+    </div>
+
+    <div class="formleftdialog">
+        <mat-form-field appearance="outline" class="textField">
+            <mat-label>Zoom URL</mat-label>
+            <input type="text" matInput formControlName="zoomurl" placeholder="Enter Zoom URL Link">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="textField">
+            <mat-label>Zoom ID</mat-label>
+            <input type="text" matInput formControlName="zoomid" placeholder="Enter Zoom Id">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="textField">
+            <mat-label>Zoom Password</mat-label>
+            <input type="text" matInput formControlName="zoompassword" placeholder="Enter Zoom Password">
+        </mat-form-field>
+    </div>
+
+</div>
+   <!-- {{addneweisForm.value|json}}
+   {{ addneweisForm.invalid| json}} -->
+    
+    <div class="formdialog">
+        <button [disabled]="addneweisForm.invalid" class= "btn" color="primary" mat-raised-button type="submit" (click)=onFormSubmit(addneweisForm.value)> Submit</button>
+    </div>
+    
+
+
+
+
+</div>

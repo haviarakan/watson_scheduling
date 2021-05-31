@@ -1,0 +1,22 @@
+<form  #Etemplate="ngForm">
+
+<label>Name:</label>
+  <input type="text" [(ngModel)]="template1.name" name="Name" minlength="4" required  placeholder="Name"/>
+  <br>
+  <label>Description:</label>
+  <input type="text" [(ngModel)]="template1.Description" name="Description" required  placeholder="Description"/>
+  <br>
+  <label>Templateid:</label>
+  <input type="number" [(ngModel)]="template1.templateid" name="templateid"  placeholder="templateid" required />
+  <br>
+  <label>fields:</label>
+  <input type="text" [(ngModel)]="template1.fields" name="fields" required  placeholder="fields" multiple/>
+  <br>
+  <button (click)="savetemplate()" class="btn btn-success" [disabled]="!Etemplate.form.valid">save</button>
+</form>
+<br>
+
+
+<li *ngFor="let template of alltemplate | async">
+        {{template.name}} | {{template.templateid}}
+</li>

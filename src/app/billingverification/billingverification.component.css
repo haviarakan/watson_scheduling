@@ -1,0 +1,53 @@
+.headerClass {
+  
+    font-size: 32px;
+    letter-spacing: 6px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .containerone {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    
+  }
+  mat-form-field {
+    margin: 10px;
+  }
+  .textField {
+    width: 500px;
+    padding: 15px;
+    font-size: 20px;
+    height: 60px;
+  }
+  .btn {
+    padding: 10px 15px;
+    border-radius: 12px;
+    width: 300px;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .btnss {
+    display: none;
+  }
+  .btnS {
+    border-radius: 12px;
+    background-color: rgba(168, 154, 154, 0.26);
+    margin: 20px 20px;
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+    font-size: 20px;
+    height: 30px;
+    width: 250px;
+  }
+  .btnS:hover {
+    background-color: rgba(78, 70, 70, 0.26);
+  }
+  

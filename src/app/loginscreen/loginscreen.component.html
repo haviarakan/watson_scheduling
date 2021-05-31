@@ -1,0 +1,79 @@
+<div [ngClass]=" mobileversion ? 'mobile-background':'desktop-background'">
+  <img [ngClass]=" mobileversion ? 'mobile-logo fadein':'desktop-logo fadein'" alt="Launch Your Legacy" src="https://firebasestorage.googleapis.com/v0/b/watsonproduction-becde.appspot.com/o/EIT%20White.png?alt=media&token=8271218c-4f6b-4f14-abf0-060f9dc3dbef"> 
+  <div class="fadein" *ngIf="!requestOTP_btn">
+    <label [ngClass]=" mobileversion ? 'mobile-email-lable':'desktop-email-lable'">
+      EIT Streaming service
+    </label>
+    <br><br>
+   
+  </div>
+
+
+<div id="recaptcha-container"></div>
+<div *ngIf="hideentry">
+<div [hidden]="!this.loggedin">
+  <div *ngIf="mobileoption">
+    <div *ngIf="internum">
+      <b [ngClass]="mobileversion ? 's2-mobile-heading' : 's2-desktop-heading'"> Enter your country code </b>
+      <br><br>
+       <input type="number" [(ngModel)]="countrycode" name="number" class="input" placeholder="Enter countrycode eg:+91" /><br>    
+  </div><br>
+  <b [ngClass]="mobileversion ? 's2-mobile-heading' : 's2-desktop-heading'"> Enter your Phone Number</b>
+  <br> <br>
+   <input type="number" [(ngModel)]="number" name="number" class="input" />
+  <button (click)="addcountrycode()" > Add </button><br><br>
+  
+      <button (click)="sendotp()" >Send OTP to Mobile</button>
+      <button (click)="resendcode()" > Resend Code</button>
+  <br><br>
+  </div>
+        
+</div>
+<div [hidden]="!this.Verify">
+  <p *ngIf="this.time<300">OTP expires in {{this.time}}s</p><br>
+  <b [ngClass]="mobileversion ? 's2-mobile-heading' : 's2-desktop-heading'"> Enter your verification Code Here: </b>
+   <br><br>
+      <input type="text" [(ngModel)]="verificationCode" name="code" class="input" />
+      <button (click)="verifycode()">Verify</button> 
+ <br> 
+
+ </div>
+<div *ngIf="!mobileoption">
+  <b [ngClass]="mobileversion ? 's2-mobile-heading' : 's2-desktop-heading'"> Enter your Email: </b>
+<br><br>
+
+<input type="text" [(ngModel)]="email" name="email" class="input" /><br><br>
+<button (click)="sendemail()"  [hidden]="!this.loggedin">Send Emailverification</button>
+
+<div *ngIf="emailsent">
+  <b [ngClass]="mobileversion ? 's2-mobile-heading' : 's2-desktop-heading'"> Email sent  </b>
+  
+</div>
+</div>
+<br>
+<label style="color: white ;font-family: Arial, Helvetica, sans-serif" (click)="mobileoption = mobileoption ? false : true">{{mobileoption ? 'Send Email Verification' : 'Send Mobile Verification'}}</label>
+</div>
+<br>
+
+<div *ngIf="userexist">
+        <div style="padding:56.25% 0 0 0;position:relative">
+                <iframe [src]="Url" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%">
+                </iframe>
+                </div>
+</div>
+<div *ngIf="docexist">
+  {{this.Error}} 
+</div>
+
+
+
+<script src="/__/firebase/6.5.0/firebase-app.js"></script>
+<script src="/__/firebase/6.5.0/firebase-auth.js"></script>
+<script src="/__/firebase/6.5.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase-database.js"></script>
+

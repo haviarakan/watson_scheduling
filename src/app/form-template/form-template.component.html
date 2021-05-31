@@ -1,0 +1,68 @@
+<h4>Create Template</h4>
+<form #template="ngForm">
+  <input type="number" [(ngModel)]="templateform.order" name="order" required placeholder="order"/>
+  <br>
+  <input type="text" [(ngModel)]="templateform.heading" name="heading" required placeholder="heading"/>
+  <br>
+  <input type="text" [(ngModel)]="templateform.description" name="description" required placeholder="description"/>
+  <br>
+  <textarea type="text" [(ngModel)]="templateform.lable" name="lable" placeholder="Quetions" required>{{lable}}</textarea>
+  <br>
+  <input type="text" [(ngModel)]="templateform.type" name="type" required placeholder="type"/>
+  <br>
+  <input type="boolean" [(ngModel)]="templateform.required" name="required" required placeholder="required"/>
+  <br>
+  <button (click)="createform()" class="btn btn-success" [disabled]="!template.form.valid">Createform</button>
+  
+</form>
+<br>
+
+<li *ngFor="let formque of formquestions | async"><span (click) ="displaytemplate(formque)" >
+  {{formque.order}} | {{formque.id}} 
+ </span> <button (click)="editform(formque)" class="btn btn-success">showedit</button>
+ 
+ <button (click)="deleteform(formque)" class="btn btn-success">Delete</button>
+  </li>
+<div *ngIf="types">
+<li *ngIf="types === 'dropdown'"><span>
+<select name="option" [(ngModel)]="option">
+  <option *ngFor="let options of getoption" [ngValue]="options">
+    {{ options }}
+  </option>
+</select>
+<input type="text" [(ngModel)]="dropdownoptions" name="options" required placeholder="options for answer"/>
+<button (click)="Addoptions()" class="btn btn-success">Add options</button>  
+</span>
+</li>
+<li *ngIf="types === 'longtext'"><span>
+  <textarea type="text" [(ngModel)]="textarea" name="type" placeholder="textarea" required>{{types}}</textarea>
+</span>
+</li>
+<li *ngIf="types === 'smalltext'"><span>
+  <input type="text" [(ngModel)]="input" name="type" placeholder="input" required/>
+</span>
+</li>
+<div *ngIf="types === 'checkbox'"><span>
+  <li *ngFor="let option of getoption">
+  <input type="checkbox" (change)="onChange($event.target.checked)">{{option}}<br>
+  </li>
+  <input type="text" [(ngModel)]="checkboxs" name="options" required placeholder="options for answer"/>
+  <button (click)="Addcheckoptions()" class="btn btn-success">Add options</button>  
+  </span>
+  </div>
+</div>
+
+<div *ngIf="this.showedit">
+  <h4>Edit Fields</h4>
+    <form #Edittemplate="ngForm">
+<input type="number" [(ngModel)]="updateform.order" name="order" required placeholder="order"/>
+<br>
+<textarea type="text" [(ngModel)]="updateform.lable" name="lable" placeholder="Quetions" required>{{lable}}</textarea>
+<br>
+<input type="text" [(ngModel)]="updateform.type" name="type" required placeholder="type"/>
+<br>
+<input type="boolean" [(ngModel)]="updateform.required" name="required" required placeholder="required"/>
+<br>
+<button (click)="updatedetails()" class="btn btn-success" [disabled]="!Edittemplate.form.valid">update Fields</button>
+</form>
+</div>

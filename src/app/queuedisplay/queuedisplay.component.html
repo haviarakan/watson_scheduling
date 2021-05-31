@@ -1,0 +1,229 @@
+  <div>
+      <div style="line-height:15px;font-size:1px">&#160;</div>  <img class="center  autowidth  fullwidth" src="https://firebasestorage.googleapis.com/v0/b/watson-9878.appspot.com/o/A%26H%20logo.png?alt=media&token=d8b34cbf-f678-467e-98a2-6204f814c7cf"
+      alt="Image" title="Image" style="outline: none;padding-top:20px;padding-left:50px;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;width: 100%;max-width: 290px" width="290">
+      <div style="line-height:15px;font-size:1px;padding-bottom: 20px;">&#160;</div><!--[if mso]></td></tr></table><![endif]-->
+
+    <div style="font-family:Arial;font-weight:bold;color: #333333;background-color: #e0e0e0;padding-top: 5px;padding-bottom: 5px;padding-left: 52px">
+     A&H Review Jul' 20
+  </div>
+    <div style="margin:50px 25px 0px 80px">
+    <div class="main">
+    <!--div style="padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;"> 
+          <b>Don't come to venue</b></div>
+          <li *ngFor="let token of alltoken | async ; let i=index;" style="padding-top: 30px" >
+         
+              {{token.tokennumber}}  
+         </li>
+      </div-->
+      <div *ngFor="let stage of nextstage">
+        <div style="float:left ; width:300px; height: 400px;overflow: scroll">{{stage.Displayname}}
+        <div *ngFor="let token of uplifereport | async;  let k=index;" style="padding-top: 30px;display: initial;">
+         <li *ngIf="token.currentstage == stage.Displayname"style="margin-top: 20px">
+            <div class="tooltip">
+                <label style="display: initial; line-height: 10px;font-size:20px;padding-top: 25px;color: #333333; " >{{token.name.split(" ")[0]}} {{token.type[0]}}</label> <span class="tooltiptext"> {{token.tokennumber}} {{token.name}} </span> </div>
+         </li>
+        </div>
+        </div>
+      </div>
+
+  
+      <!--div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+          <div style="font-family:Arial;color: #333333;">  
+    <b>On the way to venue</b> </div>
+       
+        <li *ngFor="let token of cometovenue |async; let j=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+          
+            {{token.tokennumber}} 
+        </li>        
+    </div>
+   
+        <div style="overflow-y: scroll;padding-left:10px;padding-top:10px" class="child" >
+            <div style="font-family:Arial;color: #333333;"> 
+      <b>uP! Life Report</b></div>
+        <br>
+        
+          <li *ngFor="let token of uplifereport |async;  let k=index;" style="line-height: 10px;font-size:20px;padding-top: 20px;font-family:Arial;color: #333333;">
+            
+              {{token.tokennumber}}   
+              </li>       
+        </div>
+         
+  
+        <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+            <div style="font-family:Arial;color: #333333;">
+        <b>Video Interview Queue</b></div>
+       
+        <li *ngFor="let token of readyforvideolog |async; let l=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+          
+            {{token.tokennumber}} 
+            </li>        
+    </div>
+  
+        <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+            <div style="font-family:Arial;color: #333333;">
+         <b>Video Interview</b></div>
+        
+            <li *ngFor="let token of videolog |async; let m=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+              
+                {{token.tokennumber}} 
+    </li>        
+        
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>Evolution Mapping Queue</b></div>
+ 
+     <li *ngFor="let token of emqueue |async; let n=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+    
+        {{token.tokennumber}}  
+</li>        
+ 
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>Evolution Mapping</b></div>
+ 
+     <li *ngFor="let token of evolutionmqpping |async; let o=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+     
+        {{token.tokennumber}}  
+</li>        
+ 
+</div>
+ 
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>Previous Adjustments Log Queue</b></div>
+ 
+     <li *ngFor="let token of previousadjqueu |async; let p=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+      
+        {{token.tokennumber}} 
+         </li>        
+ 
+</div>
+    </div>
+    <div class="main">
+      
+          <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+              <div style="font-family:Arial;color: #333333;">
+  <b>Previous Adjustments Log</b></div>
+ 
+     <li *ngFor="let token of previousadj |async; let q=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+     
+        {{token.tokennumber}}  
+         </li>        
+ 
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>A&H Review Queue</b></div>
+ 
+     <li *ngFor="let token of AHreview |async; let r=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+      
+        {{token.tokennumber}}  
+         </li>        
+ 
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>EIS Review Queue</b></div>
+ 
+     <li *ngFor="let token of  ATCdiaqueue |async; let s=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+  
+        {{token.tokennumber}} 
+         </li>        
+ 
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>EIS Review</b></div>
+ 
+     <li *ngFor="let token of ATCdia |async; let t=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+     
+        {{token.tokennumber}} 
+         </li>        
+ 
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>Change work Queue</b></div>
+ 
+     <li *ngFor="let token of cwqueue |async; let u=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+      
+        {{token.tokennumber}}  
+         </li>        
+ 
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>In Change Work</b></div>
+ 
+     <li *ngFor="let token of cw |async; let v=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+      
+        {{token.tokennumber}} 
+         </li>        
+ 
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>Change work Validation Queue</b></div>
+ 
+     <li *ngFor="let token of cwvalidationqueue |async; let w=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+      
+        {{token.tokennumber}}  
+         </li>        
+ 
+</div>
+<div class="child">
+  <b>Change work by A&H Validation</b>
+ 
+     <li *ngFor="let token of cwAHvalidation |async; let x=index;" style="padding-top: 30px">
+      <div class="tooltip">
+        {{token.tokennumber}} <span  class="tooltiptext">{{token.name}}</span> </div> 
+         </li>        
+ 
+        </div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>ATC Validation Queue</b></div>
+ 
+     <li *ngFor="let token of ATCvalidationqueue |async; let y=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+     
+      {{token.tokennumber}}
+         </li>        
+ 
+</div>
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>A&H ATC Validation</b></div>
+ 
+     <li *ngFor="let token of AHATCvalidation |async; let z=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+      {{token.tokennumber}} 
+         </li>        
+ 
+</div>
+
+
+    <div style="overflow-y: scroll;padding-left:10px;padding-top:10px " class="child" >
+        <div style="font-family:Arial;color: #333333;">
+  <b>Completed</b></div>
+ 
+     <li *ngFor="let token of completed |async; let a=index;" style="line-height: 10px;font-size:20px;padding-top: 25px;font-family:Arial;color: #333333;">
+      {{token.tokennumber}} 
+         </li>        
+ 
+</div>
+    </div>
+    </div>
+</div>
+-->

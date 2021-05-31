@@ -1,0 +1,18 @@
+<h4>Role Assignment</h4>
+
+<div>
+  <li *ngFor="let roles of role ;index as i">
+    {{i}} {{roles}}
+    
+    <form style="width: 200px">
+      <ng-multiselect-dropdown [placeholder]="'rolemanager'" 
+       [data]="username" 
+       [(ngModel)]="data[i].name"
+        [ngModelOptions]="{standalone: true}" 
+        [settings]="dropdownSettings"
+         (onSelect)="onItemSelect($event)">
+      </ng-multiselect-dropdown>
+    </form>
+  </li>
+  <button (click)="submit()">submit</button>
+</div>

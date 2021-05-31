@@ -1,0 +1,34 @@
+<div style="line-height:15px;font-size:1px">&#160;</div>  <img class="center  autowidth  fullwidth" src="https://firebasestorage.googleapis.com/v0/b/watson-9878.appspot.com/o/A%26H%20logo.png?alt=media&token=d8b34cbf-f678-467e-98a2-6204f814c7cf"
+      alt="Image" title="Image" style="outline: none;padding-top:20px;padding-left:50px;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;width: 100%;max-width: 290px" width="290">
+      <div style="line-height:15px;font-size:1px;padding-bottom: 20px;">&#160;</div><!--[if mso]></td></tr></table><![endif]-->
+
+    <div style="font-family:Arial;font-weight:bold;color: #333333;background-color: #e0e0e0;padding-top: 5px;padding-bottom: 5px;padding-left: 52px">
+     A&H Review Jul' 20
+  </div>
+<div *ngIf="(auth.user | async)?.displayName">
+  <div>  <span style="font-size: 120%; font-weight: bold;"></span><div style="text-align:right; float: right">Welcome <b> {{(auth.user|async)?.displayName}} </b>  </div></div>
+  
+
+<div *ngFor="let stage of nextstage; let i=index;"> 
+
+    <div *ngIf="role[i].type == stage.Displayname && role[i].name.includes(this.username)">
+    
+  <div style="float:left ; width:300px; height: 400px;overflow: scroll">{{stage.Displayname}}  
+   
+  <div *ngFor="let token of uplifereport | async;  let k=index;" >
+     
+   <li *ngIf="token.currentstage == stage.Displayname;" style="margin-top: 20px">
+    <div class="tooltip" >
+      <label style="padding-top: 30px; display: initial; line-height: 10px;font-size:20px;padding-top: 25px;color: #333333; " [ngStyle]="{'color':token.move ? 'red': 'black'}">{{token.name.split(" ")[0]}} {{token.type[0]}} </label>    <span class="tooltiptext">{{token.tokennumber}} {{token.name}}</span> </div>  <button  (click)="done(token.tokennumber,k,token.id)">Done</button>
+      <br>
+   </li>
+
+  </div>
+  
+  </div>
+</div>
+
+</div>
+
+  
+    

@@ -1,0 +1,171 @@
+<!-- <p>billingverification works!</p>
+Billing Verification 
+<form  #saledetails="ngForm">
+  First Name :   <input type="text" [(ngModel)]="billing.firstname" name="fname" minlength="4" required  placeholder="First Name"/><br>
+  Last Name :    <input type="text" [(ngModel)]="billing.lname" name="Last Name" minlength="3" required  placeholder="Last Name"/><br>
+  Email :         <input type="text" [(ngModel)]="billing.email" name="Email" placeholder="Email" required email /><br>
+  Billing Email :  <input type="text" [(ngModel)]="billing.bemail" name="Email" placeholder="BillingEmail" required email /><br>
+  Phone number : <input type="number" [(ngModel)]="billing.phone" name="Phone" minlength="10" required  placeholder="Phone"/><br>
+  Product :<select name="product" [(ngModel)]="billing.product">
+    <option *ngFor="let product of products" [ngValue]="product">
+      {{ product }}
+    </option>
+  </select><br>
+  Paymentday :  <input type="number" [(ngModel)]="billing.paymentday" name="closedprice"  placeholder="Paymentday"/><br>
+  Billing Address :<input type="text" [(ngModel)]="billing.billingaddress" name="saleby"  placeholder="Billing Address"/><br>
+  Pancard details:<input type="text" [(ngModel)]="billing.pancard" name="pancard"  placeholder="pancard"/><br> -->
+<!--
+Photo :<input type="Image" [(ngModel)]="billing.photo" name="photo"  placeholder="photo"/><br>
+-->
+<!-- </form>
+  <button type="Add" (click)="addbillingdetails()" class="btn btn-success" [disabled]="!saledetails.form.valid">Add</button> -->
+
+  <div>
+    <mat-toolbar style="justify-content: center;" color="">
+      <span class="headerClass">Billing Verification Screen</span>
+    </mat-toolbar>
+  </div>
+  
+  <div
+    *ngIf="!formDisabled === true"
+    [formGroup]="billingForm"
+    class="container"
+  >
+
+  <mat-form-field class="textField" appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input type="text" matInput formControlName="firstname" placeholder="firstname" />
+  </mat-form-field>
+
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input type="text" matInput formControlName="lastname" placeholder="clientname" />
+    </mat-form-field>
+
+
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>Date of Birth</mat-label>
+      <input type="date" matInput formControlName="dob" placeholder="Birthdate" />
+    </mat-form-field>
+
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" placeholder="email" />
+      <mat-error *ngIf = "billingForm.get('email').hasError('email')">Incorrect Format</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>Phone Number</mat-label>
+      <input
+        type="tel"
+        matInput
+        formControlName="phoneNumber"
+        placeholder="phonenumber"
+        minlength="10"
+        maxlength="10"
+      />
+      <mat-error *ngIf = "billingForm.get('phoneNumber').hasError('maxLength(10)')">Incorrect Format</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>Billing Address</mat-label>  
+      <input
+        type="text"
+        matInput
+        formControlName="billingAddress"  
+        placeholder="Address"
+      />
+    </mat-form-field>
+  
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>Billing Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="billingEmail"
+        placeholder="email"
+      />
+      <mat-error *ngIf = "billingForm.get('billingEmail').hasError('email')">Incorrect Format</mat-error>
+    </mat-form-field>
+
+    <div style="margin-top: 20px;">
+      <mat-checkbox style="height: 24px;width: 24px;font-size: 1rem;"  (change)="onChange($event.checked)">FOR GST INVOICE</mat-checkbox>
+    </div>
+
+  <div *ngIf="gstChecked" class="containerone">
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>GST Billing Address</mat-label>  
+      <input
+        type="text"
+        matInput
+        formControlName="gstBillingAddress"  
+        placeholder="Address"
+      />
+    </mat-form-field>
+  
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>GST Billing Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="gstBillingEmail"
+        placeholder="email"
+      />
+      <mat-error *ngIf = "billingForm.get('gstBillingEmail').hasError('email')">Incorrect Format</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>GST Number</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="gstNumber"
+        placeholder="Enter GST Number"
+      />
+    </mat-form-field>
+  
+    <mat-form-field class="textField" appearance="fill">
+      <mat-label>Pancard Number</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="pancardNumber"
+        placeholder="pancard number"
+      />
+    </mat-form-field>
+  </div>
+  
+    <label class="btnS" for="files">Attach Any Goverment Id Photo Copy </label>
+    <input
+      id="files"
+      class="btnss"
+      type="file"
+      accept="image/*"
+      multiple
+      (change)="addimage($event.target)"
+      required
+    />
+    <mat-list *ngFor = "let list of file">
+      <mat-list-item>{{list.name}}</mat-list-item>
+      <mat-progress-bar  style="margin-bottom: 20px;width: 300px;" mode="buffer" [value]="uploadpercent"></mat-progress-bar>
+    </mat-list>
+<!-- 
+    <mat-card style="max-width: 300px;" *ngFor = "let url of imageurls">
+      <img mat-card-image [src]="url" alt="">
+    </mat-card> -->
+      
+    <!-- <mat-progress-bar  style="margin-bottom: 20px;width: 300px;" mode="buffer" [value]="uploadpercent"></mat-progress-bar> -->
+  {{billingForm.invalid | json}}
+    <button
+      (click)="onSubmit(billingForm.value)"
+      class="btn"
+      mat-raised-button
+      color="primary"
+      [disabled]="billingForm.invalid"
+     
+    >
+    
+      Submit
+    </button>
+  </div>
+  

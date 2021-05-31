@@ -1,0 +1,11 @@
+<form  #customerForm="ngForm">
+<input type="text" [(ngModel)]="newcustomer.fname" name="Name" minlength="4" required  placeholder="First Name"/>
+<input type="text" [(ngModel)]="newcustomer.lname" name="Last Name" minlength="3" required  placeholder="Last Name"/>
+<input type="ext" [(ngModel)]="newcustomer.email" name="Email"  placeholder="Email" required email />
+<input type="number" [(ngModel)]="newcustomer.phone" name="Phone" minlength="10" required  placeholder="Phone"/>
+<button (click)="addcustomer()" type="Add" class="btn btn-success" [disabled]="false">Add Customer</button>
+
+
+<li *ngFor="let customer of allcustomers | async">
+{{customer.firstname}} | {{customer.name}} | {{customer.email}} 
+</li>

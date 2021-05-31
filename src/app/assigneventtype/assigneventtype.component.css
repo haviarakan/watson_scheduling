@@ -1,0 +1,34 @@
+.eventcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
+}
+.textField {
+    margin: 20px;
+    width: 600px;
+    padding: 15px;
+    font-size: 20px;
+    height: 60px;
+  }
+  .btn {
+    padding: 10px 15px;
+    border-radius: 12px;
+    width: 200px;
+    font-size: 24px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+
+  #event td {
+    width: 200px;
+    padding: 3px;
+  }
+  #event{
+    text-align: center;
+  }
+ 
+  #event th {
+    text-align: center;
+  }

@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    overflow: hidden;
+    height: 100vh;
+    margin-top: -100px;
+    padding-top: 100px;
+    position: relative;
+    width: 100%;
+    backface-visibility: hidden;
+    will-change: overflow;
+}
+
+
+.columnleft {
+
+    width: 70%;
+
+
+overflow: auto;
+height: auto;
+padding: .5rem;
+-webkit-overflow-scrolling: touch;
+-ms-overflow-style: none;
+}
+
+.columnright {
+
+/*    width: 45%; */
+
+overflow: auto;
+height: auto;
+padding: .5rem;
+-webkit-overflow-scrolling: touch;
+-ms-overflow-style: none;
+
+width: 25%;
+}
+
+

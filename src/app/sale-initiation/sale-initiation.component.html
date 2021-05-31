@@ -1,0 +1,238 @@
+<!-- <p>sale-initiation works!</p>
+<form  #saledetails="ngForm">
+    Date of the lead : <input type="date" [(ngModel)]="newsale.date" name="saledate" required placeholder="sale Date" /><br>
+    First Name :   <input type="text" [(ngModel)]="newsale.firstname" name="fname" minlength="4" required  placeholder="First Name"/><br>
+    Last Name :    <input type="text" [(ngModel)]="newsale.lname" name="Last Name" minlength="3" required  placeholder="Last Name"/><br>
+    Email :        <input type="text" [(ngModel)]="newsale.email" name="Email" placeholder="Email" required email /><br>
+    Phone number : <input type="number" [(ngModel)]="newsale.phone" name="Phone" minlength="10" required  placeholder="Phone"/><br>
+    Product :<select name="product" [(ngModel)]="newsale.product">
+      <option *ngFor="let product of products" [ngValue]="product">
+        {{ product }}
+      </option>
+    </select><br>
+    sale Date : <input type="date" [(ngModel)]="newsale.saledate" name="saledate" required placeholder="sale Date" /><br>
+    Closed Price :  <input type="number" [(ngModel)]="newsale.closedprice" name="closedprice"   placeholder="Closed Price"/><br>
+    EMI Plan :<input type="number" [(ngModel)]="newsale.emiplan" name="emi" placeholder="EMI Plan"/><br>
+    Token Amount :<input type="number" [(ngModel)]="newsale.tokenamt" name="tokenamt"  placeholder="Token Amount"/><br>
+    Sales Person :<input type="text" [(ngModel)]="newsale.saleby" name="saleby"  placeholder="Sales Person"/><br>
+    <br>
+    </form>-->
+    <!-- <button type="Add" (click)="addsale()" class="btn btn-success" [disabled]="!saledetails.form.valid">Add</button> -->
+    <header>
+      <mat-toolbar style="justify-content: center;" color="">
+        <span class="headerClass">SALE INITIATION FORM</span>
+      </mat-toolbar>
+    </header>
+    <div *ngIf="!dontshowform">
+      <form
+        [formGroup]="registrationForm"
+        class="container"
+        (ngSubmit)="onSubmit(registrationForm.value)"
+      >
+        <!-- {{ registrationForm.value | json }} -->
+        <mat-form-field class="textField" appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            formControlName="firstname"
+            type="text"
+            placeholder="first name"
+          />
+          <mat-error
+            *ngIf="
+              registrationForm.get('firstname').invalid &&
+              registrationForm.get('firstname').touched
+            "
+            >Client First Name is required</mat-error
+          >
+        </mat-form-field>
+    
+        <mat-form-field class="textField" appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            formControlName="lastname"
+            type="text"
+            placeholder="last name"
+          />
+          <mat-error
+            *ngIf="
+              registrationForm.get('lastname').invalid &&
+              registrationForm.get('lastname').touched
+            "
+            >Client last Name is required</mat-error
+          >
+        </mat-form-field>
+    
+        <mat-form-field class="textField" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            formControlName="email"
+            type="email"
+            matInput
+            placeholder="Email"
+          />
+        </mat-form-field>
+    
+        <mat-form-field class="textField" appearance="fill">
+          <mat-label>Phone Number</mat-label>
+          <input
+            formControlName="phonenumber"
+            type="tel"
+            matInput
+            placeholder="Phone Number"
+            minlength="10"
+            maxlength="10"
+          />
+        </mat-form-field>
+    
+        <mat-form-field class="textField" appearance="fill">
+          <mat-label>Token Amount</mat-label>
+          <input
+            formControlName="tokenamount"
+            type="number"
+            matInput
+            placeholder="Amount"
+          />
+        </mat-form-field>
+    
+        <!-- <mat-form-field class="textField" appearance="fill">
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="saledate"
+          placeholder="Choose a date"
+          (dateChange)="updateDOB($event)"
+          disabled
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+      </mat-form-field> -->
+    
+        <mat-form-field class="textField" appearance="fill">
+          <mat-label>Sale Date</mat-label>
+          <input
+            type="date"
+            matInput
+            placeholder="Choose a date"
+            formControlName="saledate"
+            required
+          />
+        </mat-form-field>
+    
+        <mat-form-field class="textField" appearance="fill">
+          <mat-label>Mode of Payment</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="mode of payment"
+            formControlName="paymentMode"
+            required
+          />
+        </mat-form-field>
+    
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="!registrationForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <!-- <p>sale-initiation works!</p>
+    <form #saledetails="ngForm">
+      Date of the lead :
+      <input
+        type="date"
+        [(ngModel)]="newsale.date"
+        name="saledate"
+        required
+        placeholder="sale Date"
+      /><br />
+      First Name :
+      <input
+        type="text"
+        [(ngModel)]="newsale.firstname"
+        name="fname"
+        minlength="4"
+        required
+        placeholder="First Name"
+      /><br />
+      Last Name :
+      <input
+        type="text"
+        [(ngModel)]="newsale.lname"
+        name="Last Name"
+        minlength="3"
+        required
+        placeholder="Last Name"
+      /><br />
+      Email :
+      <input
+        type="text"
+        [(ngModel)]="newsale.email"
+        name="Email"
+        placeholder="Email"
+        required
+        email
+      /><br />
+      Phone number :
+      <input
+        type="number"
+        [(ngModel)]="newsale.phone"
+        name="Phone"
+        minlength="10"
+        required
+        placeholder="Phone"
+      /><br />
+      Product :<select name="product" [(ngModel)]="newsale.product">
+        <option *ngFor="let product of products" [ngValue]="product">
+          {{ product }}
+        </option> </select
+      ><br />
+      sale Date :
+      <input
+        type="date"
+        [(ngModel)]="newsale.saledate"
+        name="saledate"
+        required
+        placeholder="sale Date"
+      /><br />
+      Closed Price :
+      <input
+        type="number"
+        [(ngModel)]="newsale.closedprice"
+        name="closedprice"
+        placeholder="Closed Price"
+      /><br />
+      EMI Plan :<input
+        type="number"
+        [(ngModel)]="newsale.emiplan"
+        name="emi"
+        placeholder="EMI Plan"
+      /><br />
+      Token Amount :<input
+        type="number"
+        [(ngModel)]="newsale.tokenamt"
+        name="tokenamt"
+        placeholder="Token Amount"
+      /><br />
+      Sales Person :<input
+        type="text"
+        [(ngModel)]="newsale.saleby"
+        name="saleby"
+        placeholder="Sales Person"
+      /><br />
+      <br />
+    </form>
+    <button
+      type="Add"
+      (click)="addsale()"
+      class="btn btn-success"
+      [disabled]="!saledetails.form.valid"
+    >
+      Add
+    </button> -->
+    
